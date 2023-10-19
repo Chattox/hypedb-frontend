@@ -3,9 +3,9 @@ import { generateColors } from '@mantine/colors-generator';
 
 type ExtendedCustomColors =
   | 'beige'
-  | 'teagreen'
-  | 'coral'
-  | 'rust'
+  | 'sunglow'
+  | 'airblue'
+  | 'forestgreen'
   | 'gunmetal'
   | DefaultMantineColor;
 
@@ -20,9 +20,9 @@ export const customeTheme = createTheme({
   black: 'var(--mantine-color-gunmetal-9)',
   colors: {
     beige: generateColors('#EEF4D4'),
-    teagreen: generateColors('#DAEFB3'),
-    coral: generateColors('#EA9E8D'),
-    rust: generateColors('#D64550'),
+    sunglow: generateColors('#FFCE5C'),
+    airblue: generateColors('#7CA5B8'),
+    forestgreen: generateColors('#2E933C'),
     gunmetal: generateColors('#1C2826'),
   },
 });
