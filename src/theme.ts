@@ -16,6 +16,7 @@ declare module '@mantine/core' {
 }
 
 export const customeTheme = createTheme({
+  primaryColor: 'forestgreen',
   white: 'var(--mantine-color-beige-0)',
   black: 'var(--mantine-color-gunmetal-9)',
   colors: {
