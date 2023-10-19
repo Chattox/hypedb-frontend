@@ -1,4 +1,4 @@
-import { Table } from '@mantine/core';
+import { Button, Table } from '@mantine/core';
 
 export const TableDisplay = (props: { gameData: GameTableEntry[] }) => {
   const rows = props.gameData.map((game) => (
