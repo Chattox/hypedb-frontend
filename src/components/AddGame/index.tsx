@@ -1,5 +1,6 @@
 import { Button, Modal } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
+import { AddGameForm } from './AddGameForm';
 
 export const AddGame = () => {
   const [opened, { open, close }] = useDisclosure(false);
@@ -7,7 +8,7 @@ export const AddGame = () => {
   return (
     <>
       <Modal opened={opened} onClose={close} title="Add Game">
-        <p>herpyderp</p>
+        <AddGameForm />
       </Modal>
 
       <Button onClick={open}>Add Game</Button>
