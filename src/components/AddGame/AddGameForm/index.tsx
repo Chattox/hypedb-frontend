@@ -1,5 +1,6 @@
 import { Box, Button, Group, NumberInput, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
+import { ReleaseDatePicker } from './ReleaseDatePicker';
 
 export const AddGameForm = () => {
   const initValues: GameInput = {
@@ -9,7 +10,7 @@ export const AddGameForm = () => {
     description: '',
     hypeScore: 0,
     releaseDate: {
-      dateType: '',
+      dateType: 'specific',
       dateString: '',
     },
   };
@@ -25,6 +26,7 @@ export const AddGameForm = () => {
         <TextInput label="Link URL" {...form.getInputProps('linkUrl')} />
         <TextInput label="Description" {...form.getInputProps('description')} />
         <NumberInput label="HypeScore" {...form.getInputProps('hypeScore')} />
+        <ReleaseDatePicker {...form.getInputProps('releaseDate')} />
 
         <Group justify="flex-end" mt="lg">
           <Button type="submit">Add game</Button>
