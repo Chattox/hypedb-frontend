@@ -17,3 +17,11 @@ export const GET_GAMES = gql`
     }
   }
 `;
+
+export const ADD_GAME = gql`
+  mutation AddGame($game: GameInput!) {
+    addGame(game: $game) {
+      name
+    }
+  }
+`;

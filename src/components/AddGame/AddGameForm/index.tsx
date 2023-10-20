@@ -1,8 +1,12 @@
+import { useMutation } from '@apollo/client';
 import { Box, Button, Group, NumberInput, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { ReleaseDatePicker } from './ReleaseDatePicker';
+import { ADD_GAME } from '../../../utils/operations';
 
 export const AddGameForm = () => {
+  const [addGame, { loading, error }] = useMutation(ADD_GAME);
+
   const initValues: GameInput = {
     name: '',
     genre: '',
@@ -30,7 +34,13 @@ export const AddGameForm = () => {
 
   return (
     <Box>
-      <form onSubmit={form.onSubmit((values) => console.log(values))}>
+      <form
+        onSubmit={form.onSubmit((values) =>
+          addGame({ variables: { game: values } }).catch((e) =>
+            console.log(JSON.stringify(e, null, 2))
+          )
+        )}
+      >
         <TextInput label="Title" {...form.getInputProps('name')} />
         <TextInput label="Genre" {...form.getInputProps('genre')} />
         <TextInput label="Link URL" {...form.getInputProps('linkUrl')} />
@@ -46,6 +56,8 @@ export const AddGameForm = () => {
 
         <Group justify="flex-end" mt="lg">
           <Button type="submit">Add game</Button>
+          {error ? <p>Error</p> : null}
+          {loading ? <p>Submitting...</p> : null}
         </Group>
       </form>
     </Box>
