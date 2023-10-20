@@ -1,6 +1,7 @@
 import { Spacetime } from 'spacetime';
 
 export declare global {
+  // From DB
   type Game = {
     name: string;
     genre: string;
@@ -17,6 +18,7 @@ export declare global {
     displayString: string;
   };
 
+  // For displaying in table
   interface GameTableEntry extends Game {
     [index: string]: string | number | ReleaseDateTableEntry | Spacetime;
     releaseDate: ReleaseDateTableEntry;
@@ -27,5 +29,17 @@ export declare global {
   type ReleaseDateTableEntry = {
     date: Spacetime;
     displayString: string;
+  };
+
+  // For adding games to DB
+  interface GameInput extends Game {
+    releaseDate: ReleaseDateInput;
+    createdAt?: string;
+    updatedAt?: string;
+  }
+
+  type ReleaseDateInput = {
+    dateType: string;
+    dateString: string;
   };
 }
