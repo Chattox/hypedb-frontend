@@ -39,8 +39,6 @@ export const ReleaseDatePicker = (props: ReleaseDatePickerProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [releaseDate]);
 
-  console.log(releaseDate);
-
   const getPicker = () => {
     switch (releaseDate.dateType) {
       case 'specific':

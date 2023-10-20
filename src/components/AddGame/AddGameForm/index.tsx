@@ -16,6 +16,16 @@ export const AddGameForm = () => {
   };
   const form = useForm({
     initialValues: initValues,
+    validate: {
+      name: (val) => (val.length < 1 ? 'Please enter the game title' : null),
+      genre: (val) => (val.length < 1 ? 'Please enter the genre' : null),
+      linkUrl: (val) => (val.length < 1 ? 'Please enter the game URL' : null),
+      description: (val) => (val.length < 1 ? 'Please enter the game description' : null),
+      hypeScore: (val) =>
+        val < 0 || val > 11 ? 'HypeScore must be 0 or above or 11 and below' : null,
+      releaseDate: (val) =>
+        val.dateString.length < 1 ? "Please enter the game's release date" : null,
+    },
   });
 
   return (
@@ -25,7 +35,13 @@ export const AddGameForm = () => {
         <TextInput label="Genre" {...form.getInputProps('genre')} />
         <TextInput label="Link URL" {...form.getInputProps('linkUrl')} />
         <TextInput label="Description" {...form.getInputProps('description')} />
-        <NumberInput label="HypeScore" {...form.getInputProps('hypeScore')} />
+        <NumberInput
+          label="HypeScore"
+          min={0}
+          max={11}
+          clampBehavior="strict"
+          {...form.getInputProps('hypeScore')}
+        />
         <ReleaseDatePicker {...form.getInputProps('releaseDate')} />
 
         <Group justify="flex-end" mt="lg">
