@@ -31,15 +31,16 @@ export const GameForm = (props: { mutation: any; gameValues?: GameInput }) => {
     },
   });
 
+  const handleOnSubmit = (values: GameInput) => {
+    const variables = props.gameValues
+      ? { game: { originalName: props.gameValues.name, updatedGame: values } }
+      : { game: values };
+    mutation({ variables }).catch((e) => console.log(JSON.stringify(e, null, 2)));
+  };
+
   return (
     <Box>
-      <form
-        onSubmit={form.onSubmit((values) =>
-          mutation({ variables: { game: values } }).catch((e) =>
-            console.log(JSON.stringify(e, null, 2))
-          )
-        )}
-      >
+      <form onSubmit={form.onSubmit((values) => handleOnSubmit(values))}>
         <TextInput label="Title" {...form.getInputProps('name')} />
         <TextInput label="Genre" {...form.getInputProps('genre')} />
         <TextInput label="Link URL" {...form.getInputProps('linkUrl')} />
@@ -54,7 +55,7 @@ export const GameForm = (props: { mutation: any; gameValues?: GameInput }) => {
         <ReleaseDatePicker {...form.getInputProps('releaseDate')} />
 
         <Group justify="flex-end" mt="lg">
-          <Button type="submit">Add game</Button>
+          <Button type="submit">{props.gameValues ? 'Update' : 'Add game'}</Button>
           {error ? <p>Error</p> : null}
           {loading ? <p>Submitting...</p> : null}
         </Group>

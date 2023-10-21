@@ -31,3 +31,11 @@ export const DELETE_GAME = gql`
     deleteGame(gameName: $gameName)
   }
 `;
+
+export const EDIT_GAME = gql`
+  mutation EditGame($game: UpdateGameInput!) {
+    updateGame(game: $game) {
+      name
+    }
+  }
+`;
