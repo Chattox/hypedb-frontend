@@ -25,3 +25,9 @@ export const ADD_GAME = gql`
     }
   }
 `;
+
+export const DELETE_GAME = gql`
+  mutation DeleteGame($gameName: String!) {
+    deleteGame(gameName: $gameName)
+  }
+`;
