@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import ReactDatePicker from 'react-datepicker';
 import spacetime from 'spacetime';
 import 'react-datepicker/dist/react-datepicker.module.css';
-import { capitalise } from '../../../../utils/capitalise';
+import { capitalise } from '../../../utils/capitalise';
 
 type ReleaseDatePickerProps = {
   value: ReleaseDateInput;

@@ -1,11 +1,10 @@
 import { useMutation } from '@apollo/client';
 import { Box, Button, Group, NumberInput, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import { ReleaseDatePicker } from './ReleaseDatePicker';
-import { ADD_GAME } from '../../../utils/operations';
+import { ReleaseDatePicker } from './ReleaseDatePIcker';
 
-export const AddGameForm = () => {
-  const [addGame, { loading, error }] = useMutation(ADD_GAME);
+export const GameForm = (props: { mutation: any; gameValues?: GameInput }) => {
+  const [mutation, { loading, error }] = useMutation(props.mutation);
 
   const initValues: GameInput = {
     name: '',
@@ -19,7 +18,7 @@ export const AddGameForm = () => {
     },
   };
   const form = useForm({
-    initialValues: initValues,
+    initialValues: props.gameValues ? props.gameValues : initValues,
     validate: {
       name: (val) => (val.length < 1 ? 'Please enter the game title' : null),
       genre: (val) => (val.length < 1 ? 'Please enter the genre' : null),
@@ -36,7 +35,7 @@ export const AddGameForm = () => {
     <Box>
       <form
         onSubmit={form.onSubmit((values) =>
-          addGame({ variables: { game: values } }).catch((e) =>
+          mutation({ variables: { game: values } }).catch((e) =>
             console.log(JSON.stringify(e, null, 2))
           )
         )}
