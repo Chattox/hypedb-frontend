@@ -12,13 +12,18 @@ type ReleaseDatePickerProps = {
   error?: any;
   onFocus?: any;
   onBlur?: any;
+  currentDate?: ReleaseDateInput;
 };
 
 export const ReleaseDatePicker = (props: ReleaseDatePickerProps) => {
-  const [releaseDate, setReleaseDate] = useState<ReleaseDateInput>({
-    dateType: 'specific',
-    dateString: spacetime().format('iso'),
-  });
+  const [releaseDate, setReleaseDate] = useState<ReleaseDateInput>(
+    props.currentDate
+      ? props.currentDate
+      : {
+          dateType: 'specific',
+          dateString: spacetime().format('iso'),
+        }
+  );
 
   const handleOnChange = async (changeType: 'dateType' | 'dateString' | 'custom', value: any) => {
     if (changeType === 'dateType') {

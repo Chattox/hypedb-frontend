@@ -11,6 +11,7 @@ export const GET_GAMES = gql`
       releaseDate {
         dateString
         displayString
+        dateType
       }
       createdAt
       updatedAt

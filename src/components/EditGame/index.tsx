@@ -14,10 +14,11 @@ export const EditGame = (props: { gameValues: GameTableEntry }) => {
     description: gameValues.description,
     hypeScore: gameValues.hypeScore,
     releaseDate: {
-      dateType: 'specific',
+      dateType: gameValues.releaseDate.dateType,
       dateString: gameValues.releaseDate.date.format('iso'),
     },
   };
+
   return (
     <Box>
       <Modal opened={opened} onClose={close} title="Update Game">

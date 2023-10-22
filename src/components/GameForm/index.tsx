@@ -52,7 +52,10 @@ export const GameForm = (props: { mutation: any; gameValues?: GameInput }) => {
           clampBehavior="strict"
           {...form.getInputProps('hypeScore')}
         />
-        <ReleaseDatePicker {...form.getInputProps('releaseDate')} />
+        <ReleaseDatePicker
+          currentDate={props.gameValues?.releaseDate}
+          {...form.getInputProps('releaseDate')}
+        />
 
         <Group justify="flex-end" mt="lg">
           <Button type="submit">{props.gameValues ? 'Update' : 'Add game'}</Button>
