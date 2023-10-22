@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import ReactDatePicker from 'react-datepicker';
 import spacetime from 'spacetime';
 import 'react-datepicker/dist/react-datepicker.module.css';
-import { capitalise } from '../../../../utils/capitalise';
+import { capitalise } from '../../../utils/capitalise';
 
 type ReleaseDatePickerProps = {
   value: ReleaseDateInput;
@@ -12,13 +12,18 @@ type ReleaseDatePickerProps = {
   error?: any;
   onFocus?: any;
   onBlur?: any;
+  currentDate?: ReleaseDateInput;
 };
 
 export const ReleaseDatePicker = (props: ReleaseDatePickerProps) => {
-  const [releaseDate, setReleaseDate] = useState<ReleaseDateInput>({
-    dateType: 'specific',
-    dateString: spacetime().format('iso'),
-  });
+  const [releaseDate, setReleaseDate] = useState<ReleaseDateInput>(
+    props.currentDate
+      ? props.currentDate
+      : {
+          dateType: 'specific',
+          dateString: spacetime().format('iso'),
+        }
+  );
 
   const handleOnChange = async (changeType: 'dateType' | 'dateString' | 'custom', value: any) => {
     if (changeType === 'dateType') {

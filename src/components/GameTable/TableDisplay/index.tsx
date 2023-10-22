@@ -1,5 +1,6 @@
 import { Table } from '@mantine/core';
-import { DeleteGameButton } from '../../DeleteGameButton';
+import { DeleteGame } from '../../DeleteGame';
+import { EditGame } from '../../EditGame';
 
 export const TableDisplay = (props: { gameData: GameTableEntry[] }) => {
   const rows = props.gameData.map((game) => (
@@ -13,7 +14,10 @@ export const TableDisplay = (props: { gameData: GameTableEntry[] }) => {
       <Table.Td>{game.createdAt.format('{numeric-uk} {time-24}')}</Table.Td>
       <Table.Td>{game.updatedAt.format('{numeric-uk} {time-24}')}</Table.Td>
       <Table.Td>
-        <DeleteGameButton gameName={game.name} />
+        <EditGame gameValues={game} />
+      </Table.Td>
+      <Table.Td>
+        <DeleteGame gameName={game.name} />
       </Table.Td>
     </Table.Tr>
   ));

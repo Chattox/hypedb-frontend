@@ -1,11 +1,10 @@
 import { useMutation } from '@apollo/client';
 import { Box, Button, Group, NumberInput, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import { ReleaseDatePicker } from './ReleaseDatePicker';
-import { ADD_GAME } from '../../../utils/operations';
+import { ReleaseDatePicker } from './ReleaseDatePIcker';
 
-export const AddGameForm = () => {
-  const [addGame, { loading, error }] = useMutation(ADD_GAME);
+export const GameForm = (props: { mutation: any; gameValues?: GameInput }) => {
+  const [mutation, { loading, error }] = useMutation(props.mutation);
 
   const initValues: GameInput = {
     name: '',
@@ -19,7 +18,7 @@ export const AddGameForm = () => {
     },
   };
   const form = useForm({
-    initialValues: initValues,
+    initialValues: props.gameValues ? props.gameValues : initValues,
     validate: {
       name: (val) => (val.length < 1 ? 'Please enter the game title' : null),
       genre: (val) => (val.length < 1 ? 'Please enter the genre' : null),
@@ -32,15 +31,16 @@ export const AddGameForm = () => {
     },
   });
 
+  const handleOnSubmit = (values: GameInput) => {
+    const variables = props.gameValues
+      ? { game: { originalName: props.gameValues.name, updatedGame: values } }
+      : { game: values };
+    mutation({ variables }).catch((e) => console.log(JSON.stringify(e, null, 2)));
+  };
+
   return (
     <Box>
-      <form
-        onSubmit={form.onSubmit((values) =>
-          addGame({ variables: { game: values } }).catch((e) =>
-            console.log(JSON.stringify(e, null, 2))
-          )
-        )}
-      >
+      <form onSubmit={form.onSubmit((values) => handleOnSubmit(values))}>
         <TextInput label="Title" {...form.getInputProps('name')} />
         <TextInput label="Genre" {...form.getInputProps('genre')} />
         <TextInput label="Link URL" {...form.getInputProps('linkUrl')} />
@@ -52,10 +52,13 @@ export const AddGameForm = () => {
           clampBehavior="strict"
           {...form.getInputProps('hypeScore')}
         />
-        <ReleaseDatePicker {...form.getInputProps('releaseDate')} />
+        <ReleaseDatePicker
+          currentDate={props.gameValues?.releaseDate}
+          {...form.getInputProps('releaseDate')}
+        />
 
         <Group justify="flex-end" mt="lg">
-          <Button type="submit">Add game</Button>
+          <Button type="submit">{props.gameValues ? 'Update' : 'Add game'}</Button>
           {error ? <p>Error</p> : null}
           {loading ? <p>Submitting...</p> : null}
         </Group>

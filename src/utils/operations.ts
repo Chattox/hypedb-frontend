@@ -11,6 +11,7 @@ export const GET_GAMES = gql`
       releaseDate {
         dateString
         displayString
+        dateType
       }
       createdAt
       updatedAt
@@ -29,5 +30,13 @@ export const ADD_GAME = gql`
 export const DELETE_GAME = gql`
   mutation DeleteGame($gameName: String!) {
     deleteGame(gameName: $gameName)
+  }
+`;
+
+export const EDIT_GAME = gql`
+  mutation EditGame($game: UpdateGameInput!) {
+    updateGame(game: $game) {
+      name
+    }
   }
 `;

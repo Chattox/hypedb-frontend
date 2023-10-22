@@ -16,6 +16,7 @@ export declare global {
   type ReleaseDate = {
     dateString: string;
     displayString: string;
+    dateType: string;
   };
 
   // For displaying in table
@@ -29,6 +30,7 @@ export declare global {
   type ReleaseDateTableEntry = {
     date: Spacetime;
     displayString: string;
+    dateType: string;
   };
 
   // For adding games to DB
