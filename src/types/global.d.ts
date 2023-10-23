@@ -33,6 +33,20 @@ export declare global {
     dateType: string;
   };
 
+  type Column = {
+    name: string;
+    type: string;
+    isSortable: boolean;
+    accessor: string;
+  };
+
+  type TableStateProps = {
+    gamesData: GameTableEntry[];
+    sortOrder: 'asc' | 'desc';
+    sortColumn: string;
+    loaded: boolean;
+  };
+
   // For adding games to DB
   interface GameInput extends Game {
     releaseDate: ReleaseDateInput;

@@ -1,9 +1,42 @@
 import { Table } from '@mantine/core';
 import { DeleteGame } from '../../DeleteGame';
 import { EditGame } from '../../EditGame';
+import { useEffect, useState } from 'react';
+import { tableSort } from '../../../utils/tableSort';
 
 export const TableDisplay = (props: { gameData: GameTableEntry[] }) => {
-  const rows = props.gameData.map((game) => (
+  const [state, setState] = useState<TableStateProps>({
+    gamesData: props.gameData,
+    sortOrder: 'desc',
+    sortColumn: 'Title',
+    loaded: false,
+  });
+
+  useEffect(() => {
+    if (state.loaded && state.gamesData.length > 0) {
+      const newState = tableSort(state, columns[0]);
+      setState({ ...state, sortOrder: 'asc', gamesData: newState.gamesData });
+    } else {
+      setState({
+        ...state,
+        gamesData: props.gameData,
+        loaded: props.gameData.length > 0 ? true : false,
+      });
+    }
+  }, [props.gameData, state.loaded]);
+
+  const columns: Column[] = [
+    { name: 'Title', type: 'text', isSortable: true, accessor: 'name' },
+    { name: 'Genre', type: 'text', isSortable: true, accessor: 'genre' },
+    { name: 'Link', type: 'text', isSortable: false, accessor: 'linkUrl' },
+    { name: 'Description', type: 'text', isSortable: false, accessor: 'description' },
+    { name: 'HypeScore', type: 'numeric', isSortable: true, accessor: 'hypeScore' },
+    { name: 'Release Date', type: 'releaseDate', isSortable: true, accessor: 'releaseDate' },
+    { name: 'Date Added', type: 'date', isSortable: true, accessor: 'createdAt' },
+    { name: 'Last Updated', type: 'date', isSortable: true, accessor: 'updatedAt' },
+  ];
+
+  const rows = state.gamesData.map((game) => (
     <Table.Tr key={game.name}>
       <Table.Td>{game.name}</Table.Td>
       <Table.Td>{game.genre}</Table.Td>
@@ -22,18 +55,22 @@ export const TableDisplay = (props: { gameData: GameTableEntry[] }) => {
     </Table.Tr>
   ));
 
+  const handleOnClick = (c: Column) => {
+    setState({ ...tableSort(state, c) });
+  };
+
   return (
     <Table>
       <Table.Thead>
         <Table.Tr>
-          <Table.Th>Title</Table.Th>
-          <Table.Th>Genre</Table.Th>
-          <Table.Th>Link URL</Table.Th>
-          <Table.Th>Description</Table.Th>
-          <Table.Th>HypeScore</Table.Th>
-          <Table.Th>Release Date</Table.Th>
-          <Table.Th>Date Added</Table.Th>
-          <Table.Th>Date Updated</Table.Th>
+          {columns.map((column) => (
+            <Table.Th
+              key={column.name}
+              onClick={column.isSortable ? () => handleOnClick(column) : undefined}
+            >
+              {column.name}
+            </Table.Th>
+          ))}
         </Table.Tr>
       </Table.Thead>
       <Table.Tbody>{rows}</Table.Tbody>
