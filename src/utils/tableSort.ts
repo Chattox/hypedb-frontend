@@ -1,3 +1,5 @@
+import { ColorModeContext } from '@chakra-ui/react';
+
 export const tableSort = (tableState: TableStateProps, column: Column): TableStateProps => {
   const newSortOrder =
     tableState.sortColumn === column.name
@@ -42,6 +44,24 @@ export const tableSort = (tableState: TableStateProps, column: Column): TableSta
             : [...tableState.gamesData].sort((a, b) =>
                 (a[column.accessor] as number) > (b[column.accessor] as number) ? -1 : 1
               ),
+      };
+    case 'releaseDate':
+      return {
+        ...tableState,
+        sortColumn: column.name,
+        sortOrder: newSortOrder,
+        gamesData: [...tableState.gamesData].sort((a, b) => {
+          const aDate = (a[column.accessor] as ReleaseDateTableEntry).date;
+          const bDate = (b[column.accessor] as ReleaseDateTableEntry).date;
+
+          if (aDate.isBefore(bDate)) {
+            return newSortOrder === 'asc' ? -1 : 1;
+          } else if (aDate.isAfter(bDate)) {
+            return newSortOrder === 'asc' ? 1 : -1;
+          } else {
+            return 0;
+          }
+        }),
       };
   }
   return tableState;
