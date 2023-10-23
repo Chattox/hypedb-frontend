@@ -29,6 +29,20 @@ export const tableSort = (tableState: TableStateProps, column: Column): TableSta
                   : 1
               ),
       };
+    case 'numeric':
+      return {
+        ...tableState,
+        sortColumn: column.name,
+        sortOrder: newSortOrder,
+        gamesData:
+          newSortOrder === 'asc'
+            ? [...tableState.gamesData].sort((a, b) =>
+                (a[column.accessor] as number) < (b[column.accessor] as number) ? -1 : 1
+              )
+            : [...tableState.gamesData].sort((a, b) =>
+                (a[column.accessor] as number) > (b[column.accessor] as number) ? -1 : 1
+              ),
+      };
   }
   return tableState;
 };
