@@ -1,4 +1,4 @@
-import { ColorModeContext } from '@chakra-ui/react';
+import { Spacetime } from 'spacetime';
 
 export const tableSort = (tableState: TableStateProps, column: Column): TableStateProps => {
   const newSortOrder =
@@ -7,8 +7,6 @@ export const tableSort = (tableState: TableStateProps, column: Column): TableSta
         ? 'desc'
         : 'asc'
       : 'asc';
-  console.log(`Old sort order: ${tableState.sortOrder}, new sort order: ${newSortOrder}`);
-  console.log(`Old column name: ${tableState.sortColumn}, new column name: ${column.name}`);
 
   switch (column.type) {
     case 'text':
@@ -53,6 +51,24 @@ export const tableSort = (tableState: TableStateProps, column: Column): TableSta
         gamesData: [...tableState.gamesData].sort((a, b) => {
           const aDate = (a[column.accessor] as ReleaseDateTableEntry).date;
           const bDate = (b[column.accessor] as ReleaseDateTableEntry).date;
+
+          if (aDate.isBefore(bDate)) {
+            return newSortOrder === 'asc' ? -1 : 1;
+          } else if (aDate.isAfter(bDate)) {
+            return newSortOrder === 'asc' ? 1 : -1;
+          } else {
+            return 0;
+          }
+        }),
+      };
+    case 'date':
+      return {
+        ...tableState,
+        sortColumn: column.name,
+        sortOrder: newSortOrder,
+        gamesData: [...tableState.gamesData].sort((a, b) => {
+          const aDate = a[column.accessor] as Spacetime;
+          const bDate = b[column.accessor] as Spacetime;
 
           if (aDate.isBefore(bDate)) {
             return newSortOrder === 'asc' ? -1 : 1;
