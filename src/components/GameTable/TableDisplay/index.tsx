@@ -23,6 +23,7 @@ export const TableDisplay = (props: { gameData: GameTableEntry[] }) => {
         loaded: props.gameData.length > 0 ? true : false,
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.gameData, state.loaded]);
 
   const columns: Column[] = [
