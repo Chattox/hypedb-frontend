@@ -7,6 +7,7 @@ import { tableSort } from "../../../utils/tableSort";
 export const TableDisplay = (props: {
   isLoading: boolean;
   gameData: GameTableEntry[];
+  refreshData: () => void;
 }) => {
   const [state, setState] = useState<TableStateProps>({
     gamesData: props.gameData,
@@ -27,8 +28,6 @@ export const TableDisplay = (props: {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.gameData, props.isLoading]);
-
-  console.log(props.gameData);
 
   const columns: Column[] = [
     { name: "Title", type: "text", isSortable: true, accessor: "name" },
@@ -77,10 +76,10 @@ export const TableDisplay = (props: {
       <Table.Td>{game.createdAt.format("{numeric-uk} {time-24}")}</Table.Td>
       <Table.Td>{game.updatedAt.format("{numeric-uk} {time-24}")}</Table.Td>
       <Table.Td>
-        <EditGame gameValues={game} />
+        <EditGame gameValues={game} refreshData={props.refreshData} />
       </Table.Td>
       <Table.Td>
-        <DeleteGame gameName={game.name} />
+        <DeleteGame gameName={game.name} refreshData={props.refreshData} />
       </Table.Td>
     </Table.Tr>
   ));

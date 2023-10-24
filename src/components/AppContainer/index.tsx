@@ -5,6 +5,7 @@ import { useQuery } from "@apollo/client";
 import { GET_GAMES } from "../../utils/operations";
 import { useEffect, useState } from "react";
 import { formatData } from "../../utils/formatData";
+import { AddGame } from "../AddGame";
 
 export const AppContainer = () => {
   const { data, loading, error, refetch } = useQuery(GET_GAMES);
@@ -34,6 +35,7 @@ export const AppContainer = () => {
         gameData={formattedData}
         refreshData={refreshData}
       />
+      <AddGame refreshData={refreshData} />
     </Container>
   );
 };

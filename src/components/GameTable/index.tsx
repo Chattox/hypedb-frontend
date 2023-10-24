@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import { AddGame } from "../AddGame";
 import { TableDisplay } from "./TableDisplay";
-import { Box, Button } from "@mantine/core";
+import { Box } from "@mantine/core";
 
 export const GameTable = (props: {
   isLoading: boolean;
@@ -18,9 +17,11 @@ export const GameTable = (props: {
 
   return (
     <Box>
-      <TableDisplay isLoading={props.isLoading} gameData={gameData} />
-      <AddGame />
-      <Button onClick={props.refreshData}>Refresh</Button>
+      <TableDisplay
+        isLoading={props.isLoading}
+        gameData={gameData}
+        refreshData={props.refreshData}
+      />
     </Box>
   );
 };

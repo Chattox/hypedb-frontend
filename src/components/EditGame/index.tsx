@@ -3,7 +3,10 @@ import { useDisclosure } from "@mantine/hooks";
 import { GameForm } from "../GameForm";
 import { EDIT_GAME } from "../../utils/operations";
 
-export const EditGame = (props: { gameValues: GameTableEntry }) => {
+export const EditGame = (props: {
+  gameValues: GameTableEntry;
+  refreshData: () => void;
+}) => {
   const [opened, { open, close }] = useDisclosure(false);
   const { gameValues } = props;
 
@@ -25,7 +28,11 @@ export const EditGame = (props: { gameValues: GameTableEntry }) => {
   return (
     <Box>
       <Modal opened={opened} onClose={close} title="Update Game">
-        <GameForm mutation={EDIT_GAME} gameValues={editGameValues} />
+        <GameForm
+          mutation={EDIT_GAME}
+          gameValues={editGameValues}
+          refreshData={props.refreshData}
+        />
       </Modal>
 
       <Button onClick={open}>Edit</Button>
