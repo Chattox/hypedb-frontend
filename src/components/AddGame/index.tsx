@@ -9,7 +9,7 @@ export const AddGame = (props: { refreshData: () => void }) => {
   return (
     <Box>
       <Modal opened={opened} onClose={close} title="Add Game">
-        <GameForm mutation={ADD_GAME} refreshData={props.refreshData} />
+        <GameForm mutation={ADD_GAME} refreshData={props.refreshData} closeModal={close} />
       </Modal>
 
       <Button onClick={open}>Add Game</Button>

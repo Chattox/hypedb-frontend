@@ -7,6 +7,7 @@ export const GameForm = (props: {
   mutation: any;
   gameValues?: GameInput;
   refreshData: () => void;
+  closeModal: () => void;
 }) => {
   const [mutation, { loading, error }] = useMutation(props.mutation);
 
@@ -27,16 +28,11 @@ export const GameForm = (props: {
       name: (val) => (val.length < 1 ? "Please enter the game title" : null),
       genre: (val) => (val.length < 1 ? "Please enter the genre" : null),
       linkUrl: (val) => (val.length < 1 ? "Please enter the game URL" : null),
-      description: (val) =>
-        val.length < 1 ? "Please enter the game description" : null,
+      description: (val) => (val.length < 1 ? "Please enter the game description" : null),
       hypeScore: (val) =>
-        val < 0 || val > 11
-          ? "HypeScore must be 0 or above or 11 and below"
-          : null,
+        val < 0 || val > 11 ? "HypeScore must be 0 or above or 11 and below" : null,
       releaseDate: (val) =>
-        val.dateString.length < 1
-          ? "Please enter the game's release date"
-          : null,
+        val.dateString.length < 1 ? "Please enter the game's release date" : null,
     },
   });
 
@@ -45,7 +41,10 @@ export const GameForm = (props: {
       ? { game: { originalName: props.gameValues.name, updatedGame: values } }
       : { game: values };
     mutation({ variables })
-      .then(() => props.refreshData())
+      .then(() => {
+        props.refreshData();
+        props.closeModal();
+      })
       .catch((e) => console.log(JSON.stringify(e, null, 2)));
   };
 
@@ -69,9 +68,7 @@ export const GameForm = (props: {
         />
 
         <Group justify="flex-end" mt="lg">
-          <Button type="submit">
-            {props.gameValues ? "Update" : "Add game"}
-          </Button>
+          <Button type="submit">{props.gameValues ? "Update" : "Add game"}</Button>
           {error ? <p>Error</p> : null}
           {loading ? <p>Submitting...</p> : null}
         </Group>
