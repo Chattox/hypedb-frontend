@@ -1,4 +1,4 @@
-import { Spacetime } from 'spacetime';
+import { Spacetime } from "spacetime";
 
 export declare global {
   // From DB
@@ -42,9 +42,8 @@ export declare global {
 
   type TableStateProps = {
     gamesData: GameTableEntry[];
-    sortOrder: 'asc' | 'desc';
+    sortOrder: "asc" | "desc";
     sortColumn: string;
-    loaded: boolean;
   };
 
   // For adding games to DB

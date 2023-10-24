@@ -1,30 +1,33 @@
-import { Table } from "@mantine/core";
+import { Loader, Table } from "@mantine/core";
 import { DeleteGame } from "../../DeleteGame";
 import { EditGame } from "../../EditGame";
 import { useEffect, useState } from "react";
 import { tableSort } from "../../../utils/tableSort";
 
-export const TableDisplay = (props: { gameData: GameTableEntry[] }) => {
+export const TableDisplay = (props: {
+  isLoading: boolean;
+  gameData: GameTableEntry[];
+  refreshData: () => void;
+}) => {
   const [state, setState] = useState<TableStateProps>({
     gamesData: props.gameData,
     sortOrder: "desc",
     sortColumn: "Title",
-    loaded: false,
   });
 
   useEffect(() => {
-    if (state.loaded && state.gamesData.length > 0) {
+    if (props.isLoading && state.gamesData.length > 0) {
       const newState = tableSort(state, columns[0]);
+      setState({ ...state, sortOrder: "asc", gamesData: newState.gamesData });
       setState({ ...state, sortOrder: "asc", gamesData: newState.gamesData });
     } else {
       setState({
         ...state,
         gamesData: props.gameData,
-        loaded: props.gameData.length > 0 ? true : false,
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.gameData, state.loaded]);
+  }, [props.gameData, props.isLoading]);
 
   const columns: Column[] = [
     { name: "Title", type: "text", isSortable: true, accessor: "name" },
@@ -73,10 +76,10 @@ export const TableDisplay = (props: { gameData: GameTableEntry[] }) => {
       <Table.Td>{game.createdAt.format("{numeric-uk} {time-24}")}</Table.Td>
       <Table.Td>{game.updatedAt.format("{numeric-uk} {time-24}")}</Table.Td>
       <Table.Td>
-        <EditGame gameValues={game} />
+        <EditGame gameValues={game} refreshData={props.refreshData} />
       </Table.Td>
       <Table.Td>
-        <DeleteGame gameName={game.name} />
+        <DeleteGame gameName={game.name} refreshData={props.refreshData} />
       </Table.Td>
     </Table.Tr>
   ));
@@ -84,6 +87,10 @@ export const TableDisplay = (props: { gameData: GameTableEntry[] }) => {
   const handleOnClick = (c: Column) => {
     setState({ ...tableSort(state, c) });
   };
+
+  if (props.isLoading) {
+    return <Loader />;
+  }
 
   return (
     <Table>
