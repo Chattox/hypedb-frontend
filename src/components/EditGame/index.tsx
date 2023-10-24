@@ -1,7 +1,7 @@
-import { Box, Button, Modal } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
-import { GameForm } from '../GameForm';
-import { EDIT_GAME } from '../../utils/operations';
+import { Box, Button, Modal } from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
+import { GameForm } from "../GameForm";
+import { EDIT_GAME } from "../../utils/operations";
 
 export const EditGame = (props: { gameValues: GameTableEntry }) => {
   const [opened, { open, close }] = useDisclosure(false);
@@ -15,7 +15,10 @@ export const EditGame = (props: { gameValues: GameTableEntry }) => {
     hypeScore: gameValues.hypeScore,
     releaseDate: {
       dateType: gameValues.releaseDate.dateType,
-      dateString: gameValues.releaseDate.date.format('iso'),
+      dateString:
+        gameValues.releaseDate.dateType === "custom"
+          ? gameValues.releaseDate.displayString
+          : gameValues.releaseDate.date.format("iso"),
     },
   };
 
