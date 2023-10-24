@@ -64,39 +64,6 @@ export const TableDisplay = (props: {
       isSortable: true,
       accessor: "updatedAt",
     },
-    { name: "Title", type: "text", isSortable: true, accessor: "name" },
-    { name: "Genre", type: "text", isSortable: true, accessor: "genre" },
-    { name: "Link", type: "text", isSortable: false, accessor: "linkUrl" },
-    {
-      name: "Description",
-      type: "text",
-      isSortable: false,
-      accessor: "description",
-    },
-    {
-      name: "HypeScore",
-      type: "numeric",
-      isSortable: true,
-      accessor: "hypeScore",
-    },
-    {
-      name: "Release Date",
-      type: "releaseDate",
-      isSortable: true,
-      accessor: "releaseDate",
-    },
-    {
-      name: "Date Added",
-      type: "date",
-      isSortable: true,
-      accessor: "createdAt",
-    },
-    {
-      name: "Last Updated",
-      type: "date",
-      isSortable: true,
-      accessor: "updatedAt",
-    },
   ];
 
   const rows = state.gamesData.map((game) => (
@@ -107,8 +74,6 @@ export const TableDisplay = (props: {
       <Table.Td>{game.description}</Table.Td>
       <Table.Td>{game.hypeScore}</Table.Td>
       <Table.Td>{game.releaseDate.displayString}</Table.Td>
-      <Table.Td>{game.createdAt.format("{numeric-uk} {time-24}")}</Table.Td>
-      <Table.Td>{game.updatedAt.format("{numeric-uk} {time-24}")}</Table.Td>
       <Table.Td>{game.createdAt.format("{numeric-uk} {time-24}")}</Table.Td>
       <Table.Td>{game.updatedAt.format("{numeric-uk} {time-24}")}</Table.Td>
       <Table.Td>
@@ -135,9 +100,6 @@ export const TableDisplay = (props: {
           {columns.map((column) => (
             <Table.Th
               key={column.name}
-              onClick={
-                column.isSortable ? () => handleOnClick(column) : undefined
-              }
               onClick={
                 column.isSortable ? () => handleOnClick(column) : undefined
               }
