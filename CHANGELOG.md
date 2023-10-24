@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.1.0](https://github.com/Chattox/hypedb-frontend/compare/v0.0.1...v0.1.0) (2023-10-24)
+
+
+### Features
+
+* **delete-game:** delete game button ([7463685](https://github.com/Chattox/hypedb-frontend/commit/74636858d32bcee5ba0a21758dfa8570eb55dc11))
+* **edit-game:** edit existing game information in table ([a1a6c55](https://github.com/Chattox/hypedb-frontend/commit/a1a6c55b8d1a65589f1747b16fb755cefc5b0f86))
+* **table:** add ability to sort by columns ([4369900](https://github.com/Chattox/hypedb-frontend/commit/4369900856de11a12d9375416fb2cf30a09fc043))
+
+
+### Bug Fixes
+
+* **edit-game:** fix custom date field not populating with existing value ([2f9b8d9](https://github.com/Chattox/hypedb-frontend/commit/2f9b8d9f3fccb019157d968a510a5c626078b5a4))
+* **table:** table not updating on add/edit/delete game ([278c7a5](https://github.com/Chattox/hypedb-frontend/commit/278c7a521f5aad991986293b11854d8abae33307))
+
 ## 0.0.1 (2023-10-20)
 
 
