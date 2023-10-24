@@ -1,3 +1,4 @@
+import { AddGame } from "../AddGame";
 import { TableDisplay } from "./TableDisplay";
 import { Box } from "@mantine/core";
 
@@ -8,6 +9,7 @@ export const GameTable = (props: {
   return (
     <Box>
       <TableDisplay isLoading={props.isLoading} gameData={props.gameData} />
+      <AddGame />
     </Box>
   );
 };

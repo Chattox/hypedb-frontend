@@ -24,7 +24,6 @@ export const AppContainer = () => {
   return (
     <Container className={classes.AppContainer}>
       <GameTable isLoading={loading} gameData={formattedData} />
-      <AddGame />
     </Container>
   );
 };
