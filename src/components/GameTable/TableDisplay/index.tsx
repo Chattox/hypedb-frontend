@@ -12,22 +12,22 @@ export const TableDisplay = (props: {
     gamesData: props.gameData,
     sortOrder: "desc",
     sortColumn: "Title",
-    loaded: false,
   });
 
   useEffect(() => {
-    if (state.loaded && state.gamesData.length > 0) {
+    if (props.isLoading && state.gamesData.length > 0) {
       const newState = tableSort(state, columns[0]);
       setState({ ...state, sortOrder: "asc", gamesData: newState.gamesData });
     } else {
       setState({
         ...state,
         gamesData: props.gameData,
-        loaded: props.gameData.length > 0 ? true : false,
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.gameData, state.loaded]);
+  }, [props.gameData, props.isLoading]);
+
+  console.log(props.gameData);
 
   const columns: Column[] = [
     { name: "Title", type: "text", isSortable: true, accessor: "name" },
@@ -88,6 +88,10 @@ export const TableDisplay = (props: {
     setState({ ...tableSort(state, c) });
   };
 
+  if (props.isLoading) {
+    return <Loader />;
+  }
+
   return (
     <Table>
       <Table.Thead>
@@ -104,7 +108,7 @@ export const TableDisplay = (props: {
           ))}
         </Table.Tr>
       </Table.Thead>
-      {props.isLoading ? <Loader /> : <Table.Tbody>{rows}</Table.Tbody>}
+      <Table.Tbody>{rows}</Table.Tbody>
     </Table>
   );
 };
