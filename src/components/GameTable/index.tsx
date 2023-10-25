@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { TableDisplay } from "./TableDisplay";
-import { Box } from "@mantine/core";
+import { Box, ScrollArea } from "@mantine/core";
+import classes from "./GameTable.module.css";
 
 export const GameTable = (props: {
   isLoading: boolean;
@@ -17,11 +18,13 @@ export const GameTable = (props: {
 
   return (
     <Box>
-      <TableDisplay
-        isLoading={props.isLoading}
-        gameData={gameData}
-        refreshData={props.refreshData}
-      />
+      <ScrollArea className={classes.gameTableContainer} h="80vh">
+        <TableDisplay
+          isLoading={props.isLoading}
+          gameData={gameData}
+          refreshData={props.refreshData}
+        />
+      </ScrollArea>
     </Box>
   );
 };

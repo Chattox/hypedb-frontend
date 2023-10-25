@@ -107,9 +107,7 @@ export const TableDisplay = (props: {
           {columns.map((column) => (
             <Table.Th
               key={column.name}
-              onClick={
-                column.isSortable ? () => handleOnClick(column) : undefined
-              }
+              onClick={column.isSortable ? () => handleOnClick(column) : undefined}
             >
               {column.name}
             </Table.Th>
