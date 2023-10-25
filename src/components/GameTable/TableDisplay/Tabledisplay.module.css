@@ -9,10 +9,8 @@
   text-align: center;
   height: 3rem;
   z-index: 1;
-}
-
-.gameTableHeader th {
-  background-color: var(--mantine-color-hypePurplePrimary-9);
+  color: var(--mantine-color-hypePurplePrimary-0);
+  background: linear-gradient(90deg, var(--mantine-color-hypePurplePrimary-9), var(--mantine-color-hypePink-9));
 }
 
 .gameTableHeader th:first-child {

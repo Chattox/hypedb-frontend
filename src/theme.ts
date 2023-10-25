@@ -22,7 +22,6 @@ declare module "@mantine/core" {
 
 export const customTheme = createTheme({
   primaryColor: "hypePurplePrimary",
-  white: "var(--mantine-color-hypePurplePrimary-1)",
   colors: {
     hypePurplePrimary: [
       "#f3ecfd",
@@ -108,6 +107,9 @@ export const resolver: CSSVariablesResolver = (theme) => ({
   variables: {
     "--mantine-spacing-xxs": theme.other.spacing.xxs,
   },
+  light: {
+    "--mantine-color-background-gradient":
+      "linear-gradient(135deg, var(--mantine-color-hypePurplePrimary-4), var(--mantine-color-hypePink-4))",
+  },
   dark: {},
-  light: {},
 });
