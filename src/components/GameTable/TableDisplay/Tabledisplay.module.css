@@ -1,0 +1,18 @@
+.gameTableRoot {
+  background-color: color-mix(
+    in srgb,
+    var(--mantine-color-hypePurplePrimary-0) 25%,
+    transparent
+  );
+
+  border-radius: 30px;
+}
+
+.gameTableHeader {
+  background-color: color-mix(
+    in srgb,
+    var(--mantine-color-hypePurplePrimary-9) 40%,
+    transparent
+  );
+  border-radius: 30px;
+}

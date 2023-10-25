@@ -1,8 +1,9 @@
-import { Loader, Table } from "@mantine/core";
+import { Group, Loader, Table } from "@mantine/core";
 import { DeleteGame } from "../../DeleteGame";
 import { EditGame } from "../../EditGame";
 import { useEffect, useState } from "react";
 import { tableSort } from "../../../utils/tableSort";
+import classes from "./Tabledisplay.module.css";
 
 export const TableDisplay = (props: {
   isLoading: boolean;
@@ -63,6 +64,7 @@ export const TableDisplay = (props: {
       isSortable: true,
       accessor: "updatedAt",
     },
+    { name: "", type: "text", isSortable: false, accessor: "" },
   ];
 
   const rows = state.gamesData.map((game) => (
@@ -76,10 +78,10 @@ export const TableDisplay = (props: {
       <Table.Td>{game.createdAt.format("{numeric-uk} {time-24}")}</Table.Td>
       <Table.Td>{game.updatedAt.format("{numeric-uk} {time-24}")}</Table.Td>
       <Table.Td>
-        <EditGame gameValues={game} refreshData={props.refreshData} />
-      </Table.Td>
-      <Table.Td>
-        <DeleteGame gameName={game.name} refreshData={props.refreshData} />
+        <Group>
+          <EditGame gameValues={game} refreshData={props.refreshData} />
+          <DeleteGame gameName={game.name} refreshData={props.refreshData} />
+        </Group>
       </Table.Td>
     </Table.Tr>
   ));
@@ -93,7 +95,13 @@ export const TableDisplay = (props: {
   }
 
   return (
-    <Table>
+    <Table
+      highlightOnHover
+      classNames={{
+        table: classes.gameTableRoot,
+        thead: classes.gameTableHeader,
+      }}
+    >
       <Table.Thead>
         <Table.Tr>
           {columns.map((column) => (
