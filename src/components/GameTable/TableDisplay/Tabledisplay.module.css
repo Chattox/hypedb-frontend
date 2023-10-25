@@ -5,14 +5,25 @@
     transparent
   );
 
-  border-radius: 30px;
+  border-radius: var(--mantine-spacing-xxs);
 }
 
 .gameTableHeader {
+  color: green;
+}
+
+.gameTableHeader th {
   background-color: color-mix(
     in srgb,
-    var(--mantine-color-hypePurplePrimary-9) 40%,
+    var(--mantine-color-hypePurplePrimary-5) 80%,
     transparent
   );
-  border-radius: 30px;
+}
+
+.gameTableHeader th:first-child {
+  border-top-left-radius: var(--mantine-spacing-xxs);
+}
+
+.gameTableHeader th:last-child {
+  border-top-right-radius: var(--mantine-spacing-xxs);
 }

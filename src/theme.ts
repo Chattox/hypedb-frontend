@@ -1,4 +1,5 @@
 import {
+  CSSVariablesResolver,
   DefaultMantineColor,
   MantineColorsTuple,
   createTheme,
@@ -96,4 +97,17 @@ export const customTheme = createTheme({
       "#ffe433",
     ],
   },
+  other: {
+    spacing: {
+      xxs: "0.33rem",
+    },
+  },
+});
+
+export const resolver: CSSVariablesResolver = (theme) => ({
+  variables: {
+    "--mantine-spacing-xxs": theme.other.spacing.xxs,
+  },
+  dark: {},
+  light: {},
 });

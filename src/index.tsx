@@ -5,7 +5,7 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import "@mantine/core/styles.css";
 
 import App from "./App";
-import { customTheme } from "./theme";
+import { customTheme, resolver } from "./theme";
 
 const apiUrl =
   process.env.NODE_ENV === "production"
@@ -22,7 +22,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <MantineProvider theme={customTheme}>
+    <MantineProvider theme={customTheme} cssVariablesResolver={resolver}>
       <ApolloProvider client={client}>
         <App />
       </ApolloProvider>
