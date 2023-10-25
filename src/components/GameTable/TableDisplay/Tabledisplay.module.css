@@ -1,11 +1,7 @@
 .gameTableRoot {
-  background-color: color-mix(
-    in srgb,
-    var(--mantine-color-hypePurplePrimary-0) 25%,
-    transparent
-  );
-
+  background-color: rgba(255, 255, 255, 0.2);
   border-radius: var(--mantine-spacing-xxs);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
 .gameTableHeader {
