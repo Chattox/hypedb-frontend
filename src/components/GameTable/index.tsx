@@ -18,13 +18,13 @@ export const GameTable = (props: {
 
   return (
     <Box>
-      <ScrollArea
-        className={classes.gameTableContainer}
+      <ScrollArea.Autosize
         classNames={{
+          root: classes.gameTableContainer,
           thumb: classes.gameTableScrollbarThumb,
           scrollbar: classes.gameTableScrollbar,
         }}
-        h="80vh"
+        mah="80vh"
         scrollHideDelay={150}
       >
         <TableDisplay
@@ -32,7 +32,7 @@ export const GameTable = (props: {
           gameData={gameData}
           refreshData={props.refreshData}
         />
-      </ScrollArea>
+      </ScrollArea.Autosize>
     </Box>
   );
 };
