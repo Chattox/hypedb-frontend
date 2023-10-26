@@ -97,15 +97,15 @@ export const customTheme = createTheme({
     ],
   },
   other: {
-    spacing: {
-      xxs: "0.33rem",
+    radius: {
+      hype: "0.33rem",
     },
   },
 });
 
 export const resolver: CSSVariablesResolver = (theme) => ({
   variables: {
-    "--mantine-spacing-xxs": theme.other.spacing.xxs,
+    "--mantine-radius-hype": theme.other.radius.hype,
   },
   light: {
     "--mantine-color-background-gradient":
