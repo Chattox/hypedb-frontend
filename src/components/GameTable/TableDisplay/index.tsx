@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { tableSort } from "../../../utils/tableSort";
 import classes from "./Tabledisplay.module.css";
 import { GameControls } from "../../GameControls";
+import { IconChevronDown, IconChevronUp } from "@tabler/icons-react";
 
 export const TableDisplay = (props: {
   isLoading: boolean;
@@ -11,14 +12,13 @@ export const TableDisplay = (props: {
 }) => {
   const [state, setState] = useState<TableStateProps>({
     gamesData: props.gameData,
-    sortOrder: "desc",
-    sortColumn: "Title",
+    sortOrder: "asc",
+    sortColumn: " ",
   });
 
   useEffect(() => {
     if (props.isLoading && state.gamesData.length > 0) {
       const newState = tableSort(state, columns[0]);
-      setState({ ...state, sortOrder: "asc", gamesData: newState.gamesData });
       setState({ ...state, sortOrder: "asc", gamesData: newState.gamesData });
     } else {
       setState({
@@ -111,6 +111,13 @@ export const TableDisplay = (props: {
               }
             >
               {column.name}
+              {column.name === state.sortColumn ? (
+                state.sortOrder === "asc" ? (
+                  <IconChevronUp />
+                ) : (
+                  <IconChevronDown />
+                )
+              ) : null}
             </Table.Th>
           ))}
         </Table.Tr>

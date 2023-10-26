@@ -22,6 +22,7 @@ declare module "@mantine/core" {
 
 export const customTheme = createTheme({
   primaryColor: "hypePurplePrimary",
+  black: "var(--mantine-color-hypePurpleSecondary-9)",
   colors: {
     hypePurplePrimary: [
       "#f3ecfd",

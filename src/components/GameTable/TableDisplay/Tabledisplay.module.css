@@ -1,5 +1,5 @@
 .gameTableRoot {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.25);
   --table-highlight-on-hover-color: rgba(255, 255, 255, 0.3);
   --table-border-color: color-mix(
     in srgb,
