@@ -1,6 +1,11 @@
 .gameTableRoot {
   background-color: rgba(255, 255, 255, 0.2);
   --table-highlight-on-hover-color: rgba(255, 255, 255, 0.3);
+  --table-border-color: color-mix(
+    in srgb,
+    var(--mantine-color-hypePink-0) 20%,
+    transparent
+  );
 }
 
 .gameTableHeader {
@@ -14,6 +19,7 @@
 
 .gameTableHeader th {
   text-align: center;
+  border: none;
 }
 
 .gameTableRow {

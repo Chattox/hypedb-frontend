@@ -94,6 +94,7 @@ export const TableDisplay = (props: {
     <Table
       highlightOnHover
       withRowBorders={false}
+      withColumnBorders
       classNames={{
         table: classes.gameTableRoot,
         thead: classes.gameTableHeader,
