@@ -1,9 +1,8 @@
-import { Group, Loader, Table } from "@mantine/core";
-import { DeleteGame } from "../../DeleteGame";
-import { EditGame } from "../../EditGame";
+import { Loader, Table } from "@mantine/core";
 import { useEffect, useState } from "react";
 import { tableSort } from "../../../utils/tableSort";
 import classes from "./Tabledisplay.module.css";
+import { GameControls } from "../../GameControls";
 
 export const TableDisplay = (props: {
   isLoading: boolean;
@@ -78,10 +77,7 @@ export const TableDisplay = (props: {
       <Table.Td>{game.createdAt.format("{numeric-uk} {time-24}")}</Table.Td>
       <Table.Td>{game.updatedAt.format("{numeric-uk} {time-24}")}</Table.Td>
       <Table.Td>
-        <Group>
-          <EditGame gameValues={game} refreshData={props.refreshData} />
-          <DeleteGame gameName={game.name} refreshData={props.refreshData} />
-        </Group>
+        <GameControls gameValues={game} refreshData={props.refreshData} />
       </Table.Td>
     </Table.Tr>
   ));
