@@ -6,11 +6,14 @@
 .gameTableHeader {
   position: sticky;
   top: 0;
-  text-align: center;
   height: 3rem;
   z-index: 1;
   color: var(--mantine-color-hypePurplePrimary-0);
   background: var(--mantine-color-table-header-gradient);
+}
+
+.gameTableHeader th {
+  text-align: center;
 }
 
 .gameTableRow {
