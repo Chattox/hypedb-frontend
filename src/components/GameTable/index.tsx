@@ -22,6 +22,7 @@ export const GameTable = (props: {
         className={classes.gameTableContainer}
         classNames={{ thumb: classes.gameTableScrollbar }}
         h="80vh"
+        scrollHideDelay={150}
       >
         <TableDisplay
           isLoading={props.isLoading}
