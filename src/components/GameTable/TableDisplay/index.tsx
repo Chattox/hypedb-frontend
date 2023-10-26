@@ -101,6 +101,7 @@ export const TableDisplay = (props: {
       classNames={{
         table: classes.gameTableRoot,
         thead: classes.gameTableHeader,
+        tr: classes.gameTableRow,
       }}
     >
       <Table.Thead>

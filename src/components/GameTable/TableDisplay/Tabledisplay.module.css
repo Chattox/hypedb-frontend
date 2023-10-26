@@ -12,3 +12,7 @@
   color: var(--mantine-color-hypePurplePrimary-0);
   background: var(--mantine-color-table-header-gradient);
 }
+
+.gameTableRow {
+  transition: background-color 0.15s ease-out;
+}
