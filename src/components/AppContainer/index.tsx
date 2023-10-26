@@ -1,4 +1,4 @@
-import { Box, Container, Group, Stack } from "@mantine/core";
+import { Box, Container, Group, Loader, Stack } from "@mantine/core";
 import classes from "./AppContainer.module.css";
 import { GameTable } from "../GameTable";
 import { useQuery } from "@apollo/client";
@@ -9,7 +9,7 @@ import { AddGame } from "../AddGame";
 import { customTheme } from "../../theme";
 
 export const AppContainer = () => {
-  const { data, loading, error, refetch } = useQuery(GET_GAMES);
+  const { data, loading, error, refetch, networkStatus } = useQuery(GET_GAMES);
   const [formattedData, setFormattedData] = useState<GameTableEntry[]>([]);
 
   useEffect(() => {
@@ -17,6 +17,8 @@ export const AppContainer = () => {
       setFormattedData(formatData(data.games));
     }
   }, [loading, error, data]);
+
+  console.log(networkStatus);
 
   const refreshData = () => {
     refetch().then((res) => {
@@ -31,11 +33,11 @@ export const AppContainer = () => {
 
   return (
     <Container size="lg" pt="xl" className={classes.AppContainer}>
-      <GameTable
-        isLoading={loading}
-        gameData={formattedData}
-        refreshData={refreshData}
-      />
+      {loading ? (
+        <Loader />
+      ) : (
+        <GameTable isLoading={loading} gameData={formattedData} refreshData={refreshData} />
+      )}
       <AddGame refreshData={refreshData} />
       <Group>
         <Stack gap={0}>

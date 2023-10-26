@@ -1,4 +1,4 @@
-import { Loader, Table } from "@mantine/core";
+import { Group, Loader, Table } from "@mantine/core";
 import { useEffect, useState } from "react";
 import { tableSort } from "../../../utils/tableSort";
 import classes from "./Tabledisplay.module.css";
@@ -17,9 +17,15 @@ export const TableDisplay = (props: {
   });
 
   useEffect(() => {
-    if (props.isLoading && state.gamesData.length > 0) {
+    console.log(props.isLoading);
+    console.log(state.gamesData.length);
+    if (!props.isLoading && state.gamesData.length > 0) {
+      console.log("derp");
       const newState = tableSort(state, columns[0]);
-      setState({ ...state, sortOrder: "asc", gamesData: newState.gamesData });
+      if (state.gamesData !== newState.gamesData) {
+        setState({ ...state, sortOrder: "asc", gamesData: newState.gamesData });
+        console.log("herp");
+      }
     } else {
       setState({
         ...state,
@@ -106,18 +112,18 @@ export const TableDisplay = (props: {
           {columns.map((column) => (
             <Table.Th
               key={column.name}
-              onClick={
-                column.isSortable ? () => handleOnClick(column) : undefined
-              }
+              onClick={column.isSortable ? () => handleOnClick(column) : undefined}
             >
-              {column.name}
-              {column.name === state.sortColumn ? (
-                state.sortOrder === "asc" ? (
-                  <IconChevronUp />
-                ) : (
-                  <IconChevronDown />
-                )
-              ) : null}
+              <Group justify="center" gap="xs">
+                <p>{column.name}</p>
+                {column.name === state.sortColumn ? (
+                  state.sortOrder === "asc" ? (
+                    <IconChevronUp />
+                  ) : (
+                    <IconChevronDown />
+                  )
+                ) : null}
+              </Group>
             </Table.Th>
           ))}
         </Table.Tr>
