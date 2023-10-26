@@ -110,6 +110,8 @@ export const resolver: CSSVariablesResolver = (theme) => ({
   light: {
     "--mantine-color-background-gradient":
       "linear-gradient(135deg, var(--mantine-color-hypePurplePrimary-4), var(--mantine-color-hypePink-4))",
+    "--mantine-color-table-header-gradient":
+      "linear-gradient(90deg, var(--mantine-color-hypePurplePrimary-9), var(--mantine-color-hypePink-9))",
   },
   dark: {},
 });

@@ -97,6 +97,7 @@ export const TableDisplay = (props: {
   return (
     <Table
       highlightOnHover
+      withRowBorders={false}
       classNames={{
         table: classes.gameTableRoot,
         thead: classes.gameTableHeader,
@@ -107,7 +108,9 @@ export const TableDisplay = (props: {
           {columns.map((column) => (
             <Table.Th
               key={column.name}
-              onClick={column.isSortable ? () => handleOnClick(column) : undefined}
+              onClick={
+                column.isSortable ? () => handleOnClick(column) : undefined
+              }
             >
               {column.name}
             </Table.Th>

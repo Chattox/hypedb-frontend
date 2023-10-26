@@ -20,7 +20,10 @@ export const GameTable = (props: {
     <Box>
       <ScrollArea
         className={classes.gameTableContainer}
-        classNames={{ thumb: classes.gameTableScrollbar }}
+        classNames={{
+          thumb: classes.gameTableScrollbar,
+          scrollbar: classes.gameTableScrollbar,
+        }}
         h="80vh"
         scrollHideDelay={150}
       >
