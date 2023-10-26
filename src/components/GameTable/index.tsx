@@ -18,7 +18,7 @@ export const GameTable = (props: {
 
   return (
     <Box>
-      <ScrollArea className={classes.gameTableContainer} h="80vh">
+      <ScrollArea className={classes.gameTableContainer} mah="80vh">
         <TableDisplay
           isLoading={props.isLoading}
           gameData={gameData}
