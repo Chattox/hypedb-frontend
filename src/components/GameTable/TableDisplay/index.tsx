@@ -1,8 +1,9 @@
-import { Loader, Table } from "@mantine/core";
-import { DeleteGame } from "../../DeleteGame";
-import { EditGame } from "../../EditGame";
+import { Flex, Loader, Stack, Table } from "@mantine/core";
 import { useEffect, useState } from "react";
 import { tableSort } from "../../../utils/tableSort";
+import classes from "./Tabledisplay.module.css";
+import { GameControls } from "../../GameControls";
+import { IconChevronDown, IconChevronUp } from "@tabler/icons-react";
 
 export const TableDisplay = (props: {
   isLoading: boolean;
@@ -11,15 +12,16 @@ export const TableDisplay = (props: {
 }) => {
   const [state, setState] = useState<TableStateProps>({
     gamesData: props.gameData,
-    sortOrder: "desc",
-    sortColumn: "Title",
+    sortOrder: "asc",
+    sortColumn: " ",
   });
 
   useEffect(() => {
-    if (props.isLoading && state.gamesData.length > 0) {
+    if (!props.isLoading && state.gamesData.length > 0) {
       const newState = tableSort(state, columns[0]);
-      setState({ ...state, sortOrder: "asc", gamesData: newState.gamesData });
-      setState({ ...state, sortOrder: "asc", gamesData: newState.gamesData });
+      if (state.gamesData !== newState.gamesData) {
+        setState({ ...state, sortOrder: "asc", gamesData: newState.gamesData });
+      }
     } else {
       setState({
         ...state,
@@ -63,6 +65,7 @@ export const TableDisplay = (props: {
       isSortable: true,
       accessor: "updatedAt",
     },
+    { name: "", type: "text", isSortable: false, accessor: "" },
   ];
 
   const rows = state.gamesData.map((game) => (
@@ -76,10 +79,7 @@ export const TableDisplay = (props: {
       <Table.Td>{game.createdAt.format("{numeric-uk} {time-24}")}</Table.Td>
       <Table.Td>{game.updatedAt.format("{numeric-uk} {time-24}")}</Table.Td>
       <Table.Td>
-        <EditGame gameValues={game} refreshData={props.refreshData} />
-      </Table.Td>
-      <Table.Td>
-        <DeleteGame gameName={game.name} refreshData={props.refreshData} />
+        <GameControls gameValues={game} refreshData={props.refreshData} />
       </Table.Td>
     </Table.Tr>
   ));
@@ -93,7 +93,17 @@ export const TableDisplay = (props: {
   }
 
   return (
-    <Table>
+    <Table
+      highlightOnHover
+      withRowBorders={false}
+      withColumnBorders
+      classNames={{
+        table: classes.gameTableRoot,
+        thead: classes.gameTableHeader,
+        tr: classes.gameTableRow,
+        td: classes.gameTableCell,
+      }}
+    >
       <Table.Thead>
         <Table.Tr>
           {columns.map((column) => (
@@ -103,7 +113,16 @@ export const TableDisplay = (props: {
                 column.isSortable ? () => handleOnClick(column) : undefined
               }
             >
-              {column.name}
+              <Flex justify="center" align="center" gap="xs">
+                <p>{column.name}</p>
+                {column.name === state.sortColumn ? (
+                  state.sortOrder === "asc" ? (
+                    <IconChevronUp />
+                  ) : (
+                    <IconChevronDown />
+                  )
+                ) : null}
+              </Flex>
             </Table.Th>
           ))}
         </Table.Tr>

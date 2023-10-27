@@ -1,0 +1,36 @@
+.gameTableRoot {
+  background-color: rgba(255, 255, 255, 0.25);
+  --table-highlight-on-hover-color: rgba(255, 255, 255, 0.3);
+  --table-border-color: color-mix(
+    in srgb,
+    var(--mantine-color-hypePink-0) 20%,
+    transparent
+  );
+}
+
+.gameTableHeader {
+  position: sticky;
+  top: 0;
+  height: 3rem;
+  z-index: 1;
+  color: var(--mantine-color-hypePurplePrimary-0);
+  background: var(--mantine-color-table-header-gradient);
+}
+
+.gameTableHeader th {
+  text-align: center;
+  border: none;
+}
+
+.gameTableRow {
+  transition: background-color 0.15s ease-out;
+  /* height: 60px; */
+}
+
+.gameTableCell {
+  width: 11.875%;
+}
+
+.gameTableCell:last-child {
+  width: 5%;
+}
