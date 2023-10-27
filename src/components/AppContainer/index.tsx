@@ -9,7 +9,7 @@ import { AddGame } from "../AddGame";
 import { customTheme } from "../../theme";
 
 export const AppContainer = () => {
-  const { data, loading, error, refetch, networkStatus } = useQuery(GET_GAMES);
+  const { data, loading, error, refetch } = useQuery(GET_GAMES);
   const [formattedData, setFormattedData] = useState<GameTableEntry[]>([]);
 
   useEffect(() => {
@@ -18,11 +18,8 @@ export const AppContainer = () => {
     }
   }, [loading, error, data]);
 
-  console.log(networkStatus);
-
   const refreshData = () => {
     refetch().then((res) => {
-      setFormattedData(formatData(res.data.games));
       setFormattedData(formatData(res.data.games));
     });
   };
@@ -33,10 +30,14 @@ export const AppContainer = () => {
 
   return (
     <Container size="lg" pt="xl" className={classes.AppContainer}>
-      {loading ? (
+      {loading && formattedData.length === 0 ? (
         <Loader />
       ) : (
-        <GameTable isLoading={loading} gameData={formattedData} refreshData={refreshData} />
+        <GameTable
+          isLoading={loading}
+          gameData={formattedData}
+          refreshData={refreshData}
+        />
       )}
       <AddGame refreshData={refreshData} />
       <Group>

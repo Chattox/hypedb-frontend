@@ -1,4 +1,4 @@
-import { Group, Loader, Table } from "@mantine/core";
+import { Loader, Stack, Table } from "@mantine/core";
 import { useEffect, useState } from "react";
 import { tableSort } from "../../../utils/tableSort";
 import classes from "./Tabledisplay.module.css";
@@ -17,14 +17,10 @@ export const TableDisplay = (props: {
   });
 
   useEffect(() => {
-    console.log(props.isLoading);
-    console.log(state.gamesData.length);
     if (!props.isLoading && state.gamesData.length > 0) {
-      console.log("derp");
       const newState = tableSort(state, columns[0]);
       if (state.gamesData !== newState.gamesData) {
         setState({ ...state, sortOrder: "asc", gamesData: newState.gamesData });
-        console.log("herp");
       }
     } else {
       setState({
@@ -112,9 +108,11 @@ export const TableDisplay = (props: {
           {columns.map((column) => (
             <Table.Th
               key={column.name}
-              onClick={column.isSortable ? () => handleOnClick(column) : undefined}
+              onClick={
+                column.isSortable ? () => handleOnClick(column) : undefined
+              }
             >
-              <Group justify="center" gap="xs">
+              <Stack align="center" gap={0}>
                 <p>{column.name}</p>
                 {column.name === state.sortColumn ? (
                   state.sortOrder === "asc" ? (
@@ -123,7 +121,7 @@ export const TableDisplay = (props: {
                     <IconChevronDown />
                   )
                 ) : null}
-              </Group>
+              </Stack>
             </Table.Th>
           ))}
         </Table.Tr>
