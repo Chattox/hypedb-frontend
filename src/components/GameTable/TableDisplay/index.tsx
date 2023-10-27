@@ -1,4 +1,4 @@
-import { Loader, Stack, Table } from "@mantine/core";
+import { Flex, Loader, Stack, Table } from "@mantine/core";
 import { useEffect, useState } from "react";
 import { tableSort } from "../../../utils/tableSort";
 import classes from "./Tabledisplay.module.css";
@@ -113,7 +113,7 @@ export const TableDisplay = (props: {
                 column.isSortable ? () => handleOnClick(column) : undefined
               }
             >
-              <Stack align="center" gap={0}>
+              <Flex justify="center" align="center" gap="xs">
                 <p>{column.name}</p>
                 {column.name === state.sortColumn ? (
                   state.sortOrder === "asc" ? (
@@ -122,7 +122,7 @@ export const TableDisplay = (props: {
                     <IconChevronDown />
                   )
                 ) : null}
-              </Stack>
+              </Flex>
             </Table.Th>
           ))}
         </Table.Tr>
