@@ -24,7 +24,6 @@
 
 .gameTableRow {
   transition: background-color 0.15s ease-out;
-  /* height: 60px; */
 }
 
 .gameTableCell {
@@ -33,4 +32,9 @@
 
 .gameTableCell:last-child {
   width: 5%;
+}
+
+.gameTableCellLink {
+  color: var(--mantine-color-black);
+  font-weight: inherit;
 }

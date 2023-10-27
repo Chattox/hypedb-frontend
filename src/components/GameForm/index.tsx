@@ -2,7 +2,6 @@ import { useMutation } from "@apollo/client";
 import { Box, Button, Group, NumberInput, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { ReleaseDatePicker } from "./ReleaseDatePIcker";
-import { url } from "inspector";
 
 export const GameForm = (props: {
   mutation: any;
