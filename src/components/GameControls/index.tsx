@@ -4,6 +4,7 @@ import { IconPencil, IconX } from "@tabler/icons-react";
 import { DELETE_GAME, EDIT_GAME } from "../../utils/operations";
 import { GameForm } from "../GameForm";
 import { useMutation } from "@apollo/client";
+import classes from "./GameControls.module.css";
 
 export const GameControls = (props: {
   gameValues: GameTableEntry;
@@ -45,7 +46,7 @@ export const GameControls = (props: {
         />
       </Modal>
 
-      <ActionIcon.Group>
+      <ActionIcon.Group className={classes.gameControls}>
         <ActionIcon
           variant="subtle"
           aria-label="Edit game"

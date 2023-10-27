@@ -1,4 +1,4 @@
-import { Flex, Loader, Stack, Table } from "@mantine/core";
+import { Flex, Loader, Table } from "@mantine/core";
 import { useEffect, useState } from "react";
 import { tableSort } from "../../../utils/tableSort";
 import classes from "./Tabledisplay.module.css";
