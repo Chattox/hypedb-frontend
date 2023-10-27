@@ -1,16 +1,15 @@
-import { Modal, ActionIcon } from "@mantine/core";
+import { useState } from "react";
+import { Modal, ActionIcon, Popover } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { IconPencil, IconX } from "@tabler/icons-react";
+import { IconCheck, IconPencil, IconX } from "@tabler/icons-react";
 import { DELETE_GAME, EDIT_GAME } from "../../utils/operations";
 import { GameForm } from "../GameForm";
 import { useMutation } from "@apollo/client";
 import classes from "./GameControls.module.css";
 
-export const GameControls = (props: {
-  gameValues: GameTableEntry;
-  refreshData: () => void;
-}) => {
-  const [opened, { open, close }] = useDisclosure(false);
+export const GameControls = (props: { gameValues: GameTableEntry; refreshData: () => void }) => {
+  const [gameFormOpened, { open, close }] = useDisclosure(false);
+  const [delConfirmOpen, setDelConfirmOpen] = useState<boolean>(false);
   const [deleteGame] = useMutation(DELETE_GAME);
   const { gameValues } = props;
 
@@ -37,7 +36,7 @@ export const GameControls = (props: {
 
   return (
     <>
-      <Modal opened={opened} onClose={close} title="Update Game">
+      <Modal opened={gameFormOpened} onClose={close} title="Update Game">
         <GameForm
           mutation={EDIT_GAME}
           gameValues={editGameValues}
@@ -55,14 +54,35 @@ export const GameControls = (props: {
         >
           <IconPencil />
         </ActionIcon>
-        <ActionIcon
-          variant="subtle"
-          aria-label="Delete game"
-          onClick={handleDeleteOnClick}
-          color="hypePink"
+        <Popover
+          opened={delConfirmOpen}
+          onChange={setDelConfirmOpen}
+          position="top"
+          classNames={{ dropdown: classes.delConfirmation }}
+          transitionProps={{ transition: "slide-up", duration: 150 }}
+          offset={4}
         >
-          <IconX />
-        </ActionIcon>
+          <Popover.Target>
+            <ActionIcon
+              variant="subtle"
+              aria-label="Delete game"
+              onClick={() => setDelConfirmOpen((o) => !o)}
+              color="hypePink"
+            >
+              <IconX />
+            </ActionIcon>
+          </Popover.Target>
+          <Popover.Dropdown>
+            <ActionIcon
+              variant="subtle"
+              aria-label="Delete game confirmation"
+              onClick={handleDeleteOnClick}
+              color="hypePink"
+            >
+              <IconCheck height={28} width={28} />
+            </ActionIcon>
+          </Popover.Dropdown>
+        </Popover>
       </ActionIcon.Group>
     </>
   );
