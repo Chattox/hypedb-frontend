@@ -1,9 +1,13 @@
-import { Flex, Loader, Table } from "@mantine/core";
+import { Button, Flex, Loader, Table } from "@mantine/core";
 import { useEffect, useState } from "react";
 import { tableSort } from "../../../utils/tableSort";
 import classes from "./Tabledisplay.module.css";
 import { GameControls } from "../../GameControls";
-import { IconChevronDown, IconChevronUp } from "@tabler/icons-react";
+import {
+  IconChevronDown,
+  IconChevronUp,
+  IconExternalLink,
+} from "@tabler/icons-react";
 
 export const TableDisplay = (props: {
   isLoading: boolean;
@@ -64,7 +68,19 @@ export const TableDisplay = (props: {
     <Table.Tr key={game.name}>
       <Table.Td>{game.name}</Table.Td>
       <Table.Td>{game.genre}</Table.Td>
-      <Table.Td>{game.linkUrl}</Table.Td>
+      <Table.Td>
+        <Button
+          component="a"
+          href={game.linkUrl}
+          target="_blank"
+          rel="nofollow noopener noreferrer"
+          variant="transparent"
+          rightSection={<IconExternalLink size="1rem" />}
+          className={classes.gameTableCellLink}
+        >
+          Link
+        </Button>
+      </Table.Td>
       <Table.Td>{game.description}</Table.Td>
       <Table.Td>{game.hypeScore}</Table.Td>
       <Table.Td>{game.releaseDate.displayString}</Table.Td>
