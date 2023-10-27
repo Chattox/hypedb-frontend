@@ -7,10 +7,7 @@ import { GameForm } from "../GameForm";
 import { useMutation } from "@apollo/client";
 import classes from "./GameControls.module.css";
 
-export const GameControls = (props: {
-  gameValues: GameTableEntry;
-  refreshData: () => void;
-}) => {
+export const GameControls = (props: { gameValues: GameTableEntry; refreshData: () => void }) => {
   const [gameFormOpened, { open, close }] = useDisclosure(false);
   const [delConfirmOpen, setDelConfirmOpen] = useState<boolean>(false);
   const [deleteGame] = useMutation(DELETE_GAME);
@@ -62,7 +59,7 @@ export const GameControls = (props: {
           onChange={setDelConfirmOpen}
           position="top"
           classNames={{ dropdown: classes.delConfirmation }}
-          transitionProps={{ transition: "slide-up" }}
+          transitionProps={{ transition: "slide-up", duration: 150 }}
           offset={4}
         >
           <Popover.Target>
