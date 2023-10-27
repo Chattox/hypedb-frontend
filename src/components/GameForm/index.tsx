@@ -2,6 +2,7 @@ import { useMutation } from "@apollo/client";
 import { Box, Button, Group, NumberInput, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { ReleaseDatePicker } from "./ReleaseDatePIcker";
+import { url } from "inspector";
 
 export const GameForm = (props: {
   mutation: any;
@@ -22,17 +23,26 @@ export const GameForm = (props: {
       dateString: "",
     },
   };
+
+  const urlRegex = /http(s?):\/\/(\w+\.)*(\/?\w*)*/;
+
   const form = useForm({
     initialValues: props.gameValues ? props.gameValues : initValues,
     validate: {
       name: (val) => (val.length < 1 ? "Please enter the game title" : null),
       genre: (val) => (val.length < 1 ? "Please enter the genre" : null),
-      linkUrl: (val) => (val.length < 1 ? "Please enter the game URL" : null),
-      description: (val) => (val.length < 1 ? "Please enter the game description" : null),
+      linkUrl: (val) =>
+        !urlRegex.test(val) ? "Please enter a valid URL" : null,
+      description: (val) =>
+        val.length < 1 ? "Please enter the game description" : null,
       hypeScore: (val) =>
-        val < 0 || val > 11 ? "HypeScore must be 0 or above or 11 and below" : null,
+        val < 0 || val > 11
+          ? "HypeScore must be 0 or above or 11 and below"
+          : null,
       releaseDate: (val) =>
-        val.dateString.length < 1 ? "Please enter the game's release date" : null,
+        val.dateString.length < 1
+          ? "Please enter the game's release date"
+          : null,
     },
   });
 
@@ -68,7 +78,9 @@ export const GameForm = (props: {
         />
 
         <Group justify="flex-end" mt="lg">
-          <Button type="submit">{props.gameValues ? "Update" : "Add game"}</Button>
+          <Button type="submit">
+            {props.gameValues ? "Update" : "Add game"}
+          </Button>
           {error ? <p>Error</p> : null}
           {loading ? <p>Submitting...</p> : null}
         </Group>
