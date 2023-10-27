@@ -101,6 +101,7 @@ export const TableDisplay = (props: {
         table: classes.gameTableRoot,
         thead: classes.gameTableHeader,
         tr: classes.gameTableRow,
+        td: classes.gameTableCell,
       }}
     >
       <Table.Thead>

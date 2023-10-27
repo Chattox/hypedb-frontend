@@ -29,7 +29,7 @@ export const AppContainer = () => {
   }
 
   return (
-    <Container size="lg" pt="xl" className={classes.AppContainer}>
+    <Container size="75vw" pt="xl" className={classes.AppContainer}>
       {loading && formattedData.length === 0 ? (
         <Loader />
       ) : (
