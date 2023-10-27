@@ -35,7 +35,7 @@ export const AppContainer = () => {
       ) : (
         <GameTable
           isLoading={loading}
-          gameData={formattedData}
+          gamesData={formattedData}
           refreshData={refreshData}
         />
       )}

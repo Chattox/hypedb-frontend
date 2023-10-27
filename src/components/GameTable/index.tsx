@@ -1,21 +1,12 @@
-import { useEffect, useState } from "react";
 import { TableDisplay } from "./TableDisplay";
 import { Box, ScrollArea } from "@mantine/core";
 import classes from "./GameTable.module.css";
 
 export const GameTable = (props: {
   isLoading: boolean;
-  gameData: GameTableEntry[];
+  gamesData: GameTableEntry[];
   refreshData: () => void;
 }) => {
-  const [gameData, setGameData] = useState<GameTableEntry[]>(props.gameData);
-
-  useEffect(() => {
-    if (!props.isLoading) {
-      setGameData(props.gameData);
-    }
-  }, [props.isLoading, props.gameData]);
-
   return (
     <Box>
       <ScrollArea.Autosize
@@ -29,7 +20,7 @@ export const GameTable = (props: {
       >
         <TableDisplay
           isLoading={props.isLoading}
-          gameData={gameData}
+          gamesData={props.gamesData}
           refreshData={props.refreshData}
         />
       </ScrollArea.Autosize>

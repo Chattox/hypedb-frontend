@@ -1,4 +1,4 @@
-import { Flex, Loader, Stack, Table } from "@mantine/core";
+import { Flex, Loader, Table } from "@mantine/core";
 import { useEffect, useState } from "react";
 import { tableSort } from "../../../utils/tableSort";
 import classes from "./Tabledisplay.module.css";
@@ -7,29 +7,21 @@ import { IconChevronDown, IconChevronUp } from "@tabler/icons-react";
 
 export const TableDisplay = (props: {
   isLoading: boolean;
-  gameData: GameTableEntry[];
+  gamesData: GameTableEntry[];
   refreshData: () => void;
 }) => {
   const [state, setState] = useState<TableStateProps>({
-    gamesData: props.gameData,
+    gamesData: [],
     sortOrder: "asc",
     sortColumn: " ",
   });
 
   useEffect(() => {
-    if (!props.isLoading && state.gamesData.length > 0) {
-      const newState = tableSort(state, columns[0]);
-      if (state.gamesData !== newState.gamesData) {
-        setState({ ...state, sortOrder: "asc", gamesData: newState.gamesData });
-      }
-    } else {
-      setState({
-        ...state,
-        gamesData: props.gameData,
-      });
+    if (!props.isLoading) {
+      setState({ ...state, gamesData: props.gamesData });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.gameData, props.isLoading]);
+  }, [props.gamesData, props.isLoading]);
 
   const columns: Column[] = [
     { name: "Title", type: "text", isSortable: true, accessor: "name" },
