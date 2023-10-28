@@ -5,7 +5,6 @@ import { useQuery } from "@apollo/client";
 import { GET_GAMES } from "../../utils/operations";
 import { useEffect, useState } from "react";
 import { formatData } from "../../utils/formatData";
-import { AddGame } from "../GameControls/AddGame";
 import { customTheme } from "../../theme";
 
 export const AppContainer = () => {
@@ -39,7 +38,6 @@ export const AppContainer = () => {
           refreshData={refreshData}
         />
       )}
-      <AddGame refreshData={refreshData} />
       <Group>
         <Stack gap={0}>
           {customTheme.colors?.hypePurplePrimary?.map((c) => (

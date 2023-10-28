@@ -1,8 +1,9 @@
-import { Box, ActionIcon, Modal } from "@mantine/core";
+import { Box, ActionIcon, Modal, Tooltip } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { IconPlus } from "@tabler/icons-react";
 import { GameForm } from "../../GameForm";
 import { ADD_GAME } from "../../../utils/operations";
+import classes from "../GameControls.module.css";
 
 export const AddGame = (props: { refreshData: () => void }) => {
   const [opened, { open, close }] = useDisclosure(false);
@@ -17,9 +18,25 @@ export const AddGame = (props: { refreshData: () => void }) => {
         />
       </Modal>
 
-      <ActionIcon variant="subtle" onClick={open}>
-        <IconPlus />
-      </ActionIcon>
+      <Tooltip
+        label="Add a new game"
+        transitionProps={{ transition: "slide-up", duration: 150 }}
+        classNames={{
+          tooltip: classes.addGameTooltip,
+          arrow: classes.addGameTooltip,
+        }}
+        withArrow
+        arrowSize={5}
+      >
+        <ActionIcon
+          variant="subtle"
+          color="hypePurple.0"
+          size="lg"
+          onClick={open}
+        >
+          <IconPlus size={32} />
+        </ActionIcon>
+      </Tooltip>
     </Box>
   );
 };
