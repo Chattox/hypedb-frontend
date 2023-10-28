@@ -5,7 +5,7 @@ import { useQuery } from "@apollo/client";
 import { GET_GAMES } from "../../utils/operations";
 import { useEffect, useState } from "react";
 import { formatData } from "../../utils/formatData";
-import { AddGame } from "../AddGame";
+import { AddGame } from "../GameControls/AddGame";
 import { customTheme } from "../../theme";
 
 export const AppContainer = () => {
