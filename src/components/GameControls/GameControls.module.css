@@ -5,11 +5,12 @@
 .delConfirmation {
   padding: 0.2rem;
   height: 2.15rem;
-  background-color: color-mix(
-    in srgb,
-    var(--mantine-color-hypePink-0) 100%,
-    transparent
-  );
+  background-color: var(--mantine-color-hypePink-0);
   box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.25);
   border: none;
+}
+
+.addGameTooltip {
+  color: var(--mantine-color-black);
+  background-color: var(--mantine-color-hypePink-0);
 }

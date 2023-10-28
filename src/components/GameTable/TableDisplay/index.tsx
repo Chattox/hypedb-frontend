@@ -8,6 +8,7 @@ import {
   IconChevronUp,
   IconExternalLink,
 } from "@tabler/icons-react";
+import { AddGame } from "../../GameControls/AddGame";
 
 export const TableDisplay = (props: {
   isLoading: boolean;
@@ -61,7 +62,7 @@ export const TableDisplay = (props: {
       isSortable: true,
       accessor: "updatedAt",
     },
-    { name: "", type: "text", isSortable: false, accessor: "" },
+    { name: "addGame", type: "text", isSortable: false, accessor: "" },
   ];
 
   const rows = state.gamesData.map((game) => (
@@ -114,25 +115,34 @@ export const TableDisplay = (props: {
     >
       <Table.Thead>
         <Table.Tr>
-          {columns.map((column) => (
-            <Table.Th
-              key={column.name}
-              onClick={
-                column.isSortable ? () => handleOnClick(column) : undefined
-              }
-            >
-              <Flex justify="center" align="center" gap="xs">
-                <p>{column.name}</p>
-                {column.name === state.sortColumn ? (
-                  state.sortOrder === "asc" ? (
-                    <IconChevronUp />
-                  ) : (
-                    <IconChevronDown />
-                  )
-                ) : null}
-              </Flex>
-            </Table.Th>
-          ))}
+          {columns.map((column) => {
+            if (column.name === "addGame") {
+              return (
+                <Table.Th key={column.name}>
+                  <AddGame refreshData={props.refreshData} />
+                </Table.Th>
+              );
+            }
+            return (
+              <Table.Th
+                key={column.name}
+                onClick={
+                  column.isSortable ? () => handleOnClick(column) : undefined
+                }
+              >
+                <Flex justify="center" align="center" gap="xs">
+                  <p>{column.name}</p>
+                  {column.name === state.sortColumn ? (
+                    state.sortOrder === "asc" ? (
+                      <IconChevronUp />
+                    ) : (
+                      <IconChevronDown />
+                    )
+                  ) : null}
+                </Flex>
+              </Table.Th>
+            );
+          })}
         </Table.Tr>
       </Table.Thead>
       <Table.Tbody>{rows}</Table.Tbody>
