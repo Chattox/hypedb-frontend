@@ -2,6 +2,7 @@ import { useMutation } from "@apollo/client";
 import { Box, Button, Group, NumberInput, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { ReleaseDatePicker } from "./ReleaseDatePIcker";
+import classes from "./GameForm.module.css";
 
 export const GameForm = (props: {
   mutation: any;
@@ -60,15 +61,35 @@ export const GameForm = (props: {
   return (
     <Box>
       <form onSubmit={form.onSubmit((values) => handleOnSubmit(values))}>
-        <TextInput label="Title" {...form.getInputProps("name")} />
-        <TextInput label="Genre" {...form.getInputProps("genre")} />
-        <TextInput label="Link URL" {...form.getInputProps("linkUrl")} />
-        <TextInput label="Description" {...form.getInputProps("description")} />
+        <TextInput
+          label="Title"
+          classNames={{
+            input: classes.gameFormInput,
+            error: classes.gameFormInputError,
+          }}
+          {...form.getInputProps("name")}
+        />
+        <TextInput
+          label="Genre"
+          classNames={{ input: classes.gameFormInput }}
+          {...form.getInputProps("genre")}
+        />
+        <TextInput
+          label="Link URL"
+          classNames={{ input: classes.gameFormInput }}
+          {...form.getInputProps("linkUrl")}
+        />
+        <TextInput
+          label="Description"
+          classNames={{ input: classes.gameFormInput }}
+          {...form.getInputProps("description")}
+        />
         <NumberInput
           label="HypeScore"
           min={0}
           max={11}
           clampBehavior="strict"
+          classNames={{ input: classes.gameFormInput }}
           {...form.getInputProps("hypeScore")}
         />
         <ReleaseDatePicker
