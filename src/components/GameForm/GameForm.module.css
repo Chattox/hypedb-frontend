@@ -1,11 +1,7 @@
-/* .gameFormInput {
-  border-color: var(--mantine-color-hypePurplePrimary-3);
-  &:focus {
-    border-color: var(--mantine-color-hypePurplePrimary-9);
-  }
-} */
+.gameFormSuccessNotification {
+  background-color: var(--mantine-color-hypePurplePrimary-0);
+}
 
-.gameFormInputError {
-  border-color: var(--mantine-color-hypePink-9);
-  color: var(--mantine-color-hypePink-9);
+.gameFormErrorNotification {
+  background-color: var(--mantine-color-hypePink-0);
 }
