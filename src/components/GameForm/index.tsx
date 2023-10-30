@@ -8,7 +8,7 @@ import {
   TextInput,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import { ReleaseDatePicker } from "./ReleaseDatePIcker";
+import { ReleaseDatePicker } from "./ReleaseDatePicker";
 import { useDisclosure } from "@mantine/hooks";
 import { notifications } from "@mantine/notifications";
 import { IconCheck, IconExclamationMark } from "@tabler/icons-react";
@@ -20,7 +20,7 @@ export const GameForm = (props: {
   refreshData: () => void;
   closeModal: () => void;
 }) => {
-  const [mutation, { loading, error }] = useMutation(props.mutation);
+  const [mutation] = useMutation(props.mutation);
   const [visible, { open, close }] = useDisclosure(false);
 
   const successIcon = <IconCheck />;

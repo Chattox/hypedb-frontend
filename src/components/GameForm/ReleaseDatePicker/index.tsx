@@ -2,8 +2,9 @@ import { Fieldset, NativeSelect, TextInput } from "@mantine/core";
 import { useEffect, useState } from "react";
 import ReactDatePicker from "react-datepicker";
 import spacetime from "spacetime";
-import "react-datepicker/dist/react-datepicker.module.css";
 import { capitalise } from "../../../utils/capitalise";
+import "react-datepicker/dist/react-datepicker.module.css";
+import classes from "./ReleaseDatePicker.module.css";
 
 type ReleaseDatePickerProps = {
   value: ReleaseDateInput;
@@ -71,6 +72,8 @@ export const ReleaseDatePicker = (props: ReleaseDatePickerProps) => {
               handleOnChange("dateString", date);
             }}
             inline
+            calendarClassName={classes.calendar}
+            dayClassName={(date) => classes.day}
           />
         );
       case "quarter":
@@ -106,7 +109,7 @@ export const ReleaseDatePicker = (props: ReleaseDatePickerProps) => {
   };
 
   return (
-    <Fieldset legend="Release Date" mt="md">
+    <Fieldset legend="Release Date" mt="md" className={classes.container}>
       <NativeSelect
         label="Date type"
         data={["Specific", "Quarter", "Year", "Custom"]}
@@ -114,6 +117,7 @@ export const ReleaseDatePicker = (props: ReleaseDatePickerProps) => {
         onChange={(event) =>
           handleOnChange("dateType", event.currentTarget.value)
         }
+        className={classes.dateTypeSelect}
       />
       {getPicker()}
     </Fieldset>
