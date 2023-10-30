@@ -1,8 +1,16 @@
 import { useMutation } from "@apollo/client";
-import { Box, Button, Group, NumberInput, TextInput } from "@mantine/core";
+import {
+  Box,
+  Button,
+  Group,
+  LoadingOverlay,
+  NumberInput,
+  TextInput,
+} from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { ReleaseDatePicker } from "./ReleaseDatePIcker";
 import classes from "./GameForm.module.css";
+import { useDisclosure } from "@mantine/hooks";
 
 export const GameForm = (props: {
   mutation: any;
@@ -11,6 +19,7 @@ export const GameForm = (props: {
   closeModal: () => void;
 }) => {
   const [mutation, { loading, error }] = useMutation(props.mutation);
+  const [visible, { toggle }] = useDisclosure(false);
 
   const initValues: GameInput = {
     name: "",
@@ -47,6 +56,7 @@ export const GameForm = (props: {
   });
 
   const handleOnSubmit = (values: GameInput) => {
+    toggle();
     const variables = props.gameValues
       ? { game: { originalName: props.gameValues.name, updatedGame: values } }
       : { game: values };
@@ -60,12 +70,16 @@ export const GameForm = (props: {
 
   return (
     <Box>
+      <LoadingOverlay
+        visible={visible}
+        zIndex={1000}
+        overlayProps={{ radius: "sm", blur: 2 }}
+      />
       <form onSubmit={form.onSubmit((values) => handleOnSubmit(values))}>
         <TextInput
           label="Title"
           classNames={{
             input: classes.gameFormInput,
-            error: classes.gameFormInputError,
           }}
           {...form.getInputProps("name")}
         />

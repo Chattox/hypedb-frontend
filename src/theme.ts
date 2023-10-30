@@ -101,6 +101,10 @@ export const customTheme = createTheme({
     radius: {
       hype: "0.33rem",
     },
+    color: {
+      error: "#ee2b3b",
+      success: "#81e052",
+    },
   },
 });
 
@@ -113,6 +117,8 @@ export const resolver: CSSVariablesResolver = (theme) => ({
       "linear-gradient(135deg, var(--mantine-color-hypePurplePrimary-4), var(--mantine-color-hypePink-4))",
     "--mantine-color-table-header-gradient":
       "linear-gradient(90deg, var(--mantine-color-hypePurplePrimary-9), var(--mantine-color-hypePink-9))",
+    "--mantine-color-error": theme.other.color.error,
+    "--mantine-color-success": theme.other.color.success,
   },
   dark: {},
 });
