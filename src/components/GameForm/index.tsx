@@ -1,7 +1,18 @@
 import { useMutation } from "@apollo/client";
-import { Box, Button, Group, NumberInput, TextInput } from "@mantine/core";
+import {
+  Box,
+  Button,
+  Group,
+  LoadingOverlay,
+  NumberInput,
+  TextInput,
+} from "@mantine/core";
 import { useForm } from "@mantine/form";
-import { ReleaseDatePicker } from "./ReleaseDatePIcker";
+import { ReleaseDatePicker } from "./ReleaseDatePicker";
+import { useDisclosure } from "@mantine/hooks";
+import { notifications } from "@mantine/notifications";
+import { IconCheck, IconExclamationMark } from "@tabler/icons-react";
+import classes from "./GameForm.module.css";
 
 export const GameForm = (props: {
   mutation: any;
@@ -9,7 +20,11 @@ export const GameForm = (props: {
   refreshData: () => void;
   closeModal: () => void;
 }) => {
-  const [mutation, { loading, error }] = useMutation(props.mutation);
+  const [mutation] = useMutation(props.mutation);
+  const [visible, { open, close }] = useDisclosure(false);
+
+  const successIcon = <IconCheck />;
+  const errorIcon = <IconExclamationMark />;
 
   const initValues: GameInput = {
     name: "",
@@ -46,6 +61,7 @@ export const GameForm = (props: {
   });
 
   const handleOnSubmit = (values: GameInput) => {
+    open();
     const variables = props.gameValues
       ? { game: { originalName: props.gameValues.name, updatedGame: values } }
       : { game: values };
@@ -53,12 +69,36 @@ export const GameForm = (props: {
       .then(() => {
         props.refreshData();
         props.closeModal();
+        notifications.show({
+          title: "Success!",
+          message: props.gameValues
+            ? "Game updated successfully"
+            : "Game added succesfully",
+          icon: successIcon,
+          color: "var(--mantine-color-success)",
+          className: classes.gameFormSuccessNotification,
+        });
       })
-      .catch((e) => console.log(JSON.stringify(e, null, 2)));
+      .catch((e) => {
+        notifications.show({
+          title: "Error!",
+          message: "Something went wrong, please try again",
+          icon: errorIcon,
+          color: "var(--mantine-color-error)",
+          className: classes.gameFormErrorNotification,
+        });
+        console.log(JSON.stringify(e, null, 2));
+        close();
+      });
   };
 
   return (
     <Box>
+      <LoadingOverlay
+        visible={visible}
+        zIndex={1000}
+        overlayProps={{ radius: "sm", blur: 2 }}
+      />
       <form onSubmit={form.onSubmit((values) => handleOnSubmit(values))}>
         <TextInput label="Title" {...form.getInputProps("name")} />
         <TextInput label="Genre" {...form.getInputProps("genre")} />
@@ -80,8 +120,6 @@ export const GameForm = (props: {
           <Button type="submit">
             {props.gameValues ? "Update" : "Add game"}
           </Button>
-          {error ? <p>Error</p> : null}
-          {loading ? <p>Submitting...</p> : null}
         </Group>
       </form>
     </Box>

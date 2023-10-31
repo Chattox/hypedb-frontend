@@ -7,7 +7,10 @@ import { GameForm } from "../GameForm";
 import { useMutation } from "@apollo/client";
 import classes from "./GameControls.module.css";
 
-export const GameControls = (props: { gameValues: GameTableEntry; refreshData: () => void }) => {
+export const GameControls = (props: {
+  gameValues: GameTableEntry;
+  refreshData: () => void;
+}) => {
   const [gameFormOpened, { open, close }] = useDisclosure(false);
   const [delConfirmOpen, setDelConfirmOpen] = useState<boolean>(false);
   const [deleteGame] = useMutation(DELETE_GAME);
@@ -36,7 +39,17 @@ export const GameControls = (props: { gameValues: GameTableEntry; refreshData: (
 
   return (
     <>
-      <Modal opened={gameFormOpened} onClose={close} title="Update Game">
+      <Modal
+        opened={gameFormOpened}
+        onClose={close}
+        title="Update Game"
+        classNames={{
+          header: classes.gameFormModalHeader,
+          body: classes.gameFormModalBody,
+          content: classes.gameFormModalContent,
+          close: classes.gameFormModalClose,
+        }}
+      >
         <GameForm
           mutation={EDIT_GAME}
           gameValues={editGameValues}

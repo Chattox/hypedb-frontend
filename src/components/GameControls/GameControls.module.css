@@ -14,3 +14,31 @@
   color: var(--mantine-color-black);
   background-color: var(--mantine-color-hypePink-0);
 }
+
+.gameFormModalHeader {
+  color: var(--mantine-color-hypePurplePrimary-0);
+  background: var(--mantine-color-table-header-gradient);
+}
+
+.gameFormModalHeader h2 {
+  font-weight: 500;
+}
+
+.gameFormModalBody {
+  background-color: color-mix(
+    in srgb,
+    var(--mantine-color-hypePurplePrimary-0) 50%,
+    white
+  );
+}
+
+.gameFormModalContent {
+  background-color: transparent;
+}
+
+.gameFormModalClose {
+  color: var(--mantine-color-hypePurplePrimary-0);
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.12);
+  }
+}

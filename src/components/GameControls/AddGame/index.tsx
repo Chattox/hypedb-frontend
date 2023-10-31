@@ -10,7 +10,17 @@ export const AddGame = (props: { refreshData: () => void }) => {
 
   return (
     <Box>
-      <Modal opened={opened} onClose={close} title="Add Game">
+      <Modal
+        opened={opened}
+        onClose={close}
+        title="Add Game"
+        classNames={{
+          header: classes.gameFormModalHeader,
+          body: classes.gameFormModalBody,
+          content: classes.gameFormModalContent,
+          close: classes.gameFormModalClose,
+        }}
+      >
         <GameForm
           mutation={ADD_GAME}
           refreshData={props.refreshData}
