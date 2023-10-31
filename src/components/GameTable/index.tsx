@@ -5,6 +5,7 @@ import classes from "./GameTable.module.css";
 export const GameTable = (props: {
   isLoading: boolean;
   gamesData: GameTableEntry[];
+  genreTags?: string[];
   refreshData: () => void;
 }) => {
   return (
@@ -21,6 +22,7 @@ export const GameTable = (props: {
         <TableDisplay
           isLoading={props.isLoading}
           gamesData={props.gamesData}
+          genreTags={props.genreTags}
           refreshData={props.refreshData}
         />
       </ScrollArea.Autosize>

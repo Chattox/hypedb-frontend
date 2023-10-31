@@ -6,14 +6,17 @@ import { GET_GAMES } from "../../utils/operations";
 import { useEffect, useState } from "react";
 import { formatData } from "../../utils/formatData";
 import { IconSkull } from "@tabler/icons-react";
+import { getGenreTags } from "../../utils/getGenreTags";
 
 export const AppContainer = () => {
   const { data, loading, error, refetch } = useQuery(GET_GAMES);
   const [formattedData, setFormattedData] = useState<GameTableEntry[]>([]);
+  const [genreTags, setGenreTags] = useState<string[]>([]);
 
   useEffect(() => {
     if (!loading && !error) {
       setFormattedData(formatData(data.games));
+      setGenreTags(getGenreTags(data.games));
     }
   }, [loading, error, data]);
 
@@ -32,8 +35,8 @@ export const AppContainer = () => {
         icon={<IconSkull />}
         className={classes.ServerError}
       >
-        Something has gone wrong and data isn't being received from the server.
-        Please try again later.
+        Something has gone wrong and data isn't being received from the server. Please try again
+        later.
       </Alert>
     );
   };
@@ -48,6 +51,7 @@ export const AppContainer = () => {
         <GameTable
           isLoading={loading}
           gamesData={formattedData}
+          genreTags={genreTags}
           refreshData={refreshData}
         />
       )}
