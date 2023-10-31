@@ -5,6 +5,7 @@ import {
   Group,
   LoadingOverlay,
   NumberInput,
+  TagsInput,
   TextInput,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
@@ -44,7 +45,8 @@ export const GameForm = (props: {
     initialValues: props.gameValues ? props.gameValues : initValues,
     validate: {
       name: (val) => (val.length < 1 ? "Please enter the game title" : null),
-      genre: (val) => (val.length < 1 ? "Please enter the genre" : null),
+      genre: (val) =>
+        val.length < 1 ? "Please enter at least one genre" : null,
       linkUrl: (val) =>
         !urlRegex.test(val) ? "Please enter a valid URL" : null,
       description: (val) =>
@@ -101,7 +103,12 @@ export const GameForm = (props: {
       />
       <form onSubmit={form.onSubmit((values) => handleOnSubmit(values))}>
         <TextInput label="Title" {...form.getInputProps("name")} />
-        <TextInput label="Genre" {...form.getInputProps("genre")} />
+        <TagsInput
+          label="Genre"
+          description="Add up to 4 genres"
+          maxTags={4}
+          {...form.getInputProps("genre")}
+        />
         <TextInput label="Link URL" {...form.getInputProps("linkUrl")} />
         <TextInput label="Description" {...form.getInputProps("description")} />
         <NumberInput
