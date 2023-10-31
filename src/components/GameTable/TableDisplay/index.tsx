@@ -9,6 +9,7 @@ import {
   IconExternalLink,
 } from "@tabler/icons-react";
 import { AddGame } from "../../GameControls/AddGame";
+import { Genres } from "./Genres";
 
 export const TableDisplay = (props: {
   isLoading: boolean;
@@ -68,7 +69,9 @@ export const TableDisplay = (props: {
   const rows = state.gamesData.map((game) => (
     <Table.Tr key={game.name}>
       <Table.Td>{game.name}</Table.Td>
-      <Table.Td>{game.genre}</Table.Td>
+      <Table.Td>
+        <Genres genres={game.genre} />
+      </Table.Td>
       <Table.Td>
         <Button
           component="a"

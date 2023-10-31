@@ -28,7 +28,7 @@ export const GameForm = (props: {
 
   const initValues: GameInput = {
     name: "",
-    genre: "",
+    genre: [],
     linkUrl: "",
     description: "",
     hypeScore: 0,
