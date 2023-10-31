@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.2.0](https://github.com/Chattox/hypedb-frontend/compare/v0.1.0...v0.2.0) (2023-10-31)
+
+
+### Features
+
+* **add-game:** add game button styling and move to table header ([150dac3](https://github.com/Chattox/hypedb-frontend/commit/150dac3300815697cc8682333453d60f27550bc0))
+* **game-form:** add/edit game form styling ([20ce297](https://github.com/Chattox/hypedb-frontend/commit/20ce297ac76dc3d8e46dcd1b4cfe6a40ebb2df3f))
+* **style:** server error styling ([200ece7](https://github.com/Chattox/hypedb-frontend/commit/200ece76e2f269599150e8636c982e4473d047bb))
+* **styling:** theme and table styling ([c736a26](https://github.com/Chattox/hypedb-frontend/commit/c736a2629943b43602310088f7cefe477a47505c))
+* **table:** confirmation popover on delete game ([ca834d3](https://github.com/Chattox/hypedb-frontend/commit/ca834d371afc11e92408ea55d89d0a08621815ad))
+* **table:** prettier links ([b9485fe](https://github.com/Chattox/hypedb-frontend/commit/b9485fe436877f55f64c85b2c8a52fa66e2701d5))
+
+
+### Bug Fixes
+
+* **game-form:** modal not closing on submission ([2d6f7c0](https://github.com/Chattox/hypedb-frontend/commit/2d6f7c07d271bb8a4f71a769a881a445ae8a5870))
+* **table:** table not updating when adding/editing/deleting game ([b958239](https://github.com/Chattox/hypedb-frontend/commit/b95823961e44647922b638b25e9490ffddc3676d))
+
 ## [0.1.0](https://github.com/Chattox/hypedb-frontend/compare/v0.0.1...v0.1.0) (2023-10-24)
 
 
