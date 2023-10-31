@@ -1,0 +1,100 @@
+@import "../../../../node_modules/react-datepicker/dist/react-datepicker.css";
+
+// Universal
+
+.react-datepicker {
+  border-color: var(--mantine-color-gray-4);
+  font-family: var(--mantine-font-family);
+}
+
+.react-datepicker__header {
+  background: linear-gradient(
+    90deg,
+    var(--mantine-color-hypePurplePrimary-6),
+    var(--mantine-color-hypePink-6)
+  );
+}
+
+.react-datepicker__navigation:hover *::before {
+  border-color: var(--mantine-color-hypePurplePrimary-9);
+}
+
+.react-datepicker__navigation-icon::before {
+  border-color: var(--mantine-color-hypePurplePrimary-0);
+  margin-top: 0.3rem;
+  &:hover {
+    border-color: var(--mantine-color-hypePurplePrimary-9);
+  }
+}
+
+// Specific
+
+.react-datepicker__current-month {
+  color: var(--mantine-color-hypePurplePrimary-0);
+  font-weight: 500;
+}
+
+.react-datepicker__day-name {
+  color: var(--mantine-color-hypePurplePrimary-0);
+}
+
+.react-datepicker__day {
+  color: var(--mantine-color-black);
+  &:hover {
+    background-color: var(--mantine-color-hypePurplePrimary-1);
+  }
+  &--selected {
+    background-color: var(--mantine-color-hypePink-3);
+    &:hover {
+      background-color: var(--mantine-color-hypePink-5);
+    }
+  }
+  &--keyboard-selected {
+    background-color: var(--mantine-color-hypePurpleSecondary-1);
+  }
+}
+
+// Quarter
+
+.react-datepicker-year-header {
+  color: var(--mantine-color-hypePurplePrimary-0);
+  font-weight: 500;
+}
+
+.react-datepicker__quarter-text {
+  color: var(--mantine-color-black);
+  &:hover {
+    background-color: var(--mantine-color-hypePurplePrimary-1);
+  }
+  &--selected {
+    background-color: var(--mantine-color-hypePink-3);
+    &:hover {
+      background-color: var(--mantine-color-hypePink-5);
+    }
+  }
+  &--keyboard-selected {
+    background-color: var(--mantine-color-hypePurpleSecondary-1);
+  }
+}
+
+// Year
+
+.react-datepicker__year-wrapper {
+  justify-content: space-around;
+}
+
+.react-datepicker__year-text {
+  color: var(--mantine-color-black);
+  &:hover {
+    background-color: var(--mantine-color-hypePurplePrimary-1);
+  }
+  &--selected {
+    background-color: var(--mantine-color-hypePink-3);
+    &:hover {
+      background-color: var(--mantine-color-hypePink-5);
+    }
+  }
+  &--keyboard-selected {
+    background-color: var(--mantine-color-hypePurpleSecondary-1);
+  }
+}

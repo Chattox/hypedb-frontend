@@ -1,33 +1,32 @@
-import { Loader, Table } from "@mantine/core";
-import { DeleteGame } from "../../DeleteGame";
-import { EditGame } from "../../EditGame";
+import { Button, Flex, Loader, Table } from "@mantine/core";
 import { useEffect, useState } from "react";
 import { tableSort } from "../../../utils/tableSort";
+import classes from "./Tabledisplay.module.css";
+import { GameControls } from "../../GameControls";
+import {
+  IconChevronDown,
+  IconChevronUp,
+  IconExternalLink,
+} from "@tabler/icons-react";
+import { AddGame } from "../../GameControls/AddGame";
 
 export const TableDisplay = (props: {
   isLoading: boolean;
-  gameData: GameTableEntry[];
+  gamesData: GameTableEntry[];
   refreshData: () => void;
 }) => {
   const [state, setState] = useState<TableStateProps>({
-    gamesData: props.gameData,
-    sortOrder: "desc",
-    sortColumn: "Title",
+    gamesData: [],
+    sortOrder: "asc",
+    sortColumn: " ",
   });
 
   useEffect(() => {
-    if (props.isLoading && state.gamesData.length > 0) {
-      const newState = tableSort(state, columns[0]);
-      setState({ ...state, sortOrder: "asc", gamesData: newState.gamesData });
-      setState({ ...state, sortOrder: "asc", gamesData: newState.gamesData });
-    } else {
-      setState({
-        ...state,
-        gamesData: props.gameData,
-      });
+    if (!props.isLoading) {
+      setState({ ...state, gamesData: props.gamesData });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.gameData, props.isLoading]);
+  }, [props.gamesData, props.isLoading]);
 
   const columns: Column[] = [
     { name: "Title", type: "text", isSortable: true, accessor: "name" },
@@ -63,23 +62,33 @@ export const TableDisplay = (props: {
       isSortable: true,
       accessor: "updatedAt",
     },
+    { name: "addGame", type: "text", isSortable: false, accessor: "" },
   ];
 
   const rows = state.gamesData.map((game) => (
     <Table.Tr key={game.name}>
       <Table.Td>{game.name}</Table.Td>
       <Table.Td>{game.genre}</Table.Td>
-      <Table.Td>{game.linkUrl}</Table.Td>
+      <Table.Td>
+        <Button
+          component="a"
+          href={game.linkUrl}
+          target="_blank"
+          rel="nofollow noopener noreferrer"
+          variant="transparent"
+          rightSection={<IconExternalLink size="1rem" />}
+          className={classes.gameTableCellLink}
+        >
+          Link
+        </Button>
+      </Table.Td>
       <Table.Td>{game.description}</Table.Td>
       <Table.Td>{game.hypeScore}</Table.Td>
       <Table.Td>{game.releaseDate.displayString}</Table.Td>
       <Table.Td>{game.createdAt.format("{numeric-uk} {time-24}")}</Table.Td>
       <Table.Td>{game.updatedAt.format("{numeric-uk} {time-24}")}</Table.Td>
       <Table.Td>
-        <EditGame gameValues={game} refreshData={props.refreshData} />
-      </Table.Td>
-      <Table.Td>
-        <DeleteGame gameName={game.name} refreshData={props.refreshData} />
+        <GameControls gameValues={game} refreshData={props.refreshData} />
       </Table.Td>
     </Table.Tr>
   ));
@@ -93,19 +102,47 @@ export const TableDisplay = (props: {
   }
 
   return (
-    <Table>
+    <Table
+      highlightOnHover
+      withRowBorders={false}
+      withColumnBorders
+      classNames={{
+        table: classes.gameTableRoot,
+        thead: classes.gameTableHeader,
+        tr: classes.gameTableRow,
+        td: classes.gameTableCell,
+      }}
+    >
       <Table.Thead>
         <Table.Tr>
-          {columns.map((column) => (
-            <Table.Th
-              key={column.name}
-              onClick={
-                column.isSortable ? () => handleOnClick(column) : undefined
-              }
-            >
-              {column.name}
-            </Table.Th>
-          ))}
+          {columns.map((column) => {
+            if (column.name === "addGame") {
+              return (
+                <Table.Th key={column.name}>
+                  <AddGame refreshData={props.refreshData} />
+                </Table.Th>
+              );
+            }
+            return (
+              <Table.Th
+                key={column.name}
+                onClick={
+                  column.isSortable ? () => handleOnClick(column) : undefined
+                }
+              >
+                <Flex justify="center" align="center" gap="xs">
+                  <p>{column.name}</p>
+                  {column.name === state.sortColumn ? (
+                    state.sortOrder === "asc" ? (
+                      <IconChevronUp />
+                    ) : (
+                      <IconChevronDown />
+                    )
+                  ) : null}
+                </Flex>
+              </Table.Th>
+            );
+          })}
         </Table.Tr>
       </Table.Thead>
       <Table.Tbody>{rows}</Table.Tbody>

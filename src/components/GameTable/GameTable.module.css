@@ -1,0 +1,14 @@
+.gameTableContainer {
+  box-shadow: 0 0 1.25rem rgba(0, 0, 0, 0.1);
+  border-radius: var(--mantine-radius-hype);
+}
+
+.gameTableScrollbar {
+  color: transparent;
+  background: none;
+}
+
+.gameTableScrollbarThumb {
+  color: transparent;
+  background-color: rgba(255, 255, 255, 0.4) !important;
+}

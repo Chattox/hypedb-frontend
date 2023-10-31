@@ -1,14 +1,16 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { MantineProvider } from '@mantine/core';
-import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
-import '@mantine/core/styles.css';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { MantineProvider } from "@mantine/core";
+import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+import "@mantine/core/styles.css";
+import "@mantine/notifications/styles.css";
 
-import App from './App';
-import { customeTheme } from './theme';
+import App from "./App";
+import { customTheme, resolver } from "./theme";
+import { Notifications } from "@mantine/notifications";
 
 const apiUrl =
-  process.env.NODE_ENV === 'production'
+  process.env.NODE_ENV === "production"
     ? process.env.REACT_APP_PROD_API_URL
     : process.env.REACT_APP_LOCAL_API_URL;
 
@@ -17,11 +19,14 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+const root = ReactDOM.createRoot(
+  document.getElementById("root") as HTMLElement
+);
 root.render(
   <React.StrictMode>
-    <MantineProvider theme={customeTheme}>
+    <MantineProvider theme={customTheme} cssVariablesResolver={resolver}>
       <ApolloProvider client={client}>
+        <Notifications autoClose={3000} />
         <App />
       </ApolloProvider>
     </MantineProvider>

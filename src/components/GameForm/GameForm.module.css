@@ -1,0 +1,7 @@
+.gameFormSuccessNotification {
+  background-color: var(--mantine-color-hypePurplePrimary-0);
+}
+
+.gameFormErrorNotification {
+  background-color: var(--mantine-color-hypePink-0);
+}

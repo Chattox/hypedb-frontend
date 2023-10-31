@@ -1,4 +1,5 @@
-import { AppContainer } from './components/AppContainer';
+import { AppContainer } from "./components/AppContainer";
+import "./global.css";
 
 function App() {
   return <AppContainer />;
