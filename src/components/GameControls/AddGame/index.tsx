@@ -21,7 +21,12 @@ export const AddGame = (props: { genreTags?: string[]; refreshData: () => void }
           close: classes.gameFormModalClose,
         }}
       >
-        <GameForm mutation={ADD_GAME} refreshData={props.refreshData} closeModal={close} />
+        <GameForm
+          mutation={ADD_GAME}
+          genreTags={props.genreTags}
+          refreshData={props.refreshData}
+          closeModal={close}
+        />
       </Modal>
 
       <Tooltip
