@@ -1,4 +1,4 @@
-import { Box, Container, Group, Loader, Stack } from "@mantine/core";
+import { Alert, Box, Container, Group, Loader, Stack } from "@mantine/core";
 import classes from "./AppContainer.module.css";
 import { GameTable } from "../GameTable";
 import { useQuery } from "@apollo/client";
@@ -6,6 +6,7 @@ import { GET_GAMES } from "../../utils/operations";
 import { useEffect, useState } from "react";
 import { formatData } from "../../utils/formatData";
 import { customTheme } from "../../theme";
+import { IconSkull } from "@tabler/icons-react";
 
 export const AppContainer = () => {
   const { data, loading, error, refetch } = useQuery(GET_GAMES);
@@ -23,13 +24,26 @@ export const AppContainer = () => {
     });
   };
 
-  if (error) {
-    return <p>Error: {`${error.message}`}</p>;
-  }
+  const ServerError = () => {
+    return (
+      <Alert
+        title="Uh oh!"
+        color="color-mix(in srgb, var(--mantine-color-error) 75%, transparent)"
+        variant="filled"
+        icon={<IconSkull />}
+        className={classes.ServerError}
+      >
+        Something has gone wrong and data isn't being received from the server.
+        Please try again later.
+      </Alert>
+    );
+  };
 
   return (
     <Container size="75vw" pt="xl" className={classes.AppContainer}>
-      {loading && formattedData.length === 0 ? (
+      {error ? (
+        <ServerError />
+      ) : loading && formattedData.length === 0 ? (
         <Loader />
       ) : (
         <GameTable
