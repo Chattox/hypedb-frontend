@@ -76,3 +76,25 @@
     background-color: var(--mantine-color-hypePurpleSecondary-1);
   }
 }
+
+// Year
+
+.react-datepicker__year-wrapper {
+  justify-content: space-around;
+}
+
+.react-datepicker__year-text {
+  color: var(--mantine-color-black);
+  &:hover {
+    background-color: var(--mantine-color-hypePurplePrimary-1);
+  }
+  &--selected {
+    background-color: var(--mantine-color-hypePink-3);
+    &:hover {
+      background-color: var(--mantine-color-hypePink-5);
+    }
+  }
+  &--keyboard-selected {
+    background-color: var(--mantine-color-hypePurpleSecondary-1);
+  }
+}
