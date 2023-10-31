@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/Chattox/hypedb-frontend/compare/v0.2.0...v0.3.0) (2023-10-31)
+
+
+### Features
+
+* **genre-tags:** genre tags with autocomplete ([521814e](https://github.com/Chattox/hypedb-frontend/commit/521814e7c0dc93e3ff18743dc866f9945c948166))
+
 ## [0.2.0](https://github.com/Chattox/hypedb-frontend/compare/v0.1.0...v0.2.0) (2023-10-31)
 
 
