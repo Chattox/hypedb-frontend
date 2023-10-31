@@ -4,7 +4,7 @@ export declare global {
   // From DB
   type Game = {
     name: string;
-    genre: string;
+    genre: string[];
     linkUrl: string;
     description: string;
     hypeScore: number;
@@ -21,7 +21,12 @@ export declare global {
 
   // For displaying in table
   interface GameTableEntry extends Game {
-    [index: string]: string | number | ReleaseDateTableEntry | Spacetime;
+    [index: string]:
+      | string
+      | string[]
+      | number
+      | ReleaseDateTableEntry
+      | Spacetime;
     releaseDate: ReleaseDateTableEntry;
     createdAt: Spacetime;
     updatedAt: Spacetime;

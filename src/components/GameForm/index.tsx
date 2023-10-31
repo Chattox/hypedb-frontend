@@ -5,6 +5,7 @@ import {
   Group,
   LoadingOverlay,
   NumberInput,
+  TagsInput,
   TextInput,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
@@ -17,6 +18,7 @@ import classes from "./GameForm.module.css";
 export const GameForm = (props: {
   mutation: any;
   gameValues?: GameInput;
+  genreTags?: string[];
   refreshData: () => void;
   closeModal: () => void;
 }) => {
@@ -28,7 +30,7 @@ export const GameForm = (props: {
 
   const initValues: GameInput = {
     name: "",
-    genre: "",
+    genre: [],
     linkUrl: "",
     description: "",
     hypeScore: 0,
@@ -44,19 +46,13 @@ export const GameForm = (props: {
     initialValues: props.gameValues ? props.gameValues : initValues,
     validate: {
       name: (val) => (val.length < 1 ? "Please enter the game title" : null),
-      genre: (val) => (val.length < 1 ? "Please enter the genre" : null),
-      linkUrl: (val) =>
-        !urlRegex.test(val) ? "Please enter a valid URL" : null,
-      description: (val) =>
-        val.length < 1 ? "Please enter the game description" : null,
+      genre: (val) => (val.length < 1 ? "Please enter at least one genre" : null),
+      linkUrl: (val) => (!urlRegex.test(val) ? "Please enter a valid URL" : null),
+      description: (val) => (val.length < 1 ? "Please enter the game description" : null),
       hypeScore: (val) =>
-        val < 0 || val > 11
-          ? "HypeScore must be 0 or above or 11 and below"
-          : null,
+        val < 0 || val > 11 ? "HypeScore must be 0 or above or 11 and below" : null,
       releaseDate: (val) =>
-        val.dateString.length < 1
-          ? "Please enter the game's release date"
-          : null,
+        val.dateString.length < 1 ? "Please enter the game's release date" : null,
     },
   });
 
@@ -71,9 +67,7 @@ export const GameForm = (props: {
         props.closeModal();
         notifications.show({
           title: "Success!",
-          message: props.gameValues
-            ? "Game updated successfully"
-            : "Game added succesfully",
+          message: props.gameValues ? "Game updated successfully" : "Game added succesfully",
           icon: successIcon,
           color: "var(--mantine-color-success)",
           className: classes.gameFormSuccessNotification,
@@ -94,14 +88,16 @@ export const GameForm = (props: {
 
   return (
     <Box>
-      <LoadingOverlay
-        visible={visible}
-        zIndex={1000}
-        overlayProps={{ radius: "sm", blur: 2 }}
-      />
+      <LoadingOverlay visible={visible} zIndex={1000} overlayProps={{ radius: "sm", blur: 2 }} />
       <form onSubmit={form.onSubmit((values) => handleOnSubmit(values))}>
         <TextInput label="Title" {...form.getInputProps("name")} />
-        <TextInput label="Genre" {...form.getInputProps("genre")} />
+        <TagsInput
+          label="Genre"
+          description="Add up to 4 genres"
+          maxTags={4}
+          data={props.genreTags}
+          {...form.getInputProps("genre")}
+        />
         <TextInput label="Link URL" {...form.getInputProps("linkUrl")} />
         <TextInput label="Description" {...form.getInputProps("description")} />
         <NumberInput
@@ -117,9 +113,7 @@ export const GameForm = (props: {
         />
 
         <Group justify="flex-end" mt="lg">
-          <Button type="submit">
-            {props.gameValues ? "Update" : "Add game"}
-          </Button>
+          <Button type="submit">{props.gameValues ? "Update" : "Add game"}</Button>
         </Group>
       </form>
     </Box>

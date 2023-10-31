@@ -3,16 +3,14 @@ import { useEffect, useState } from "react";
 import { tableSort } from "../../../utils/tableSort";
 import classes from "./Tabledisplay.module.css";
 import { GameControls } from "../../GameControls";
-import {
-  IconChevronDown,
-  IconChevronUp,
-  IconExternalLink,
-} from "@tabler/icons-react";
+import { IconChevronDown, IconChevronUp, IconExternalLink } from "@tabler/icons-react";
 import { AddGame } from "../../GameControls/AddGame";
+import { Genres } from "./Genres";
 
 export const TableDisplay = (props: {
   isLoading: boolean;
   gamesData: GameTableEntry[];
+  genreTags?: string[];
   refreshData: () => void;
 }) => {
   const [state, setState] = useState<TableStateProps>({
@@ -30,7 +28,7 @@ export const TableDisplay = (props: {
 
   const columns: Column[] = [
     { name: "Title", type: "text", isSortable: true, accessor: "name" },
-    { name: "Genre", type: "text", isSortable: true, accessor: "genre" },
+    { name: "Genre", type: "text", isSortable: false, accessor: "genre" },
     { name: "Link", type: "text", isSortable: false, accessor: "linkUrl" },
     {
       name: "Description",
@@ -68,7 +66,9 @@ export const TableDisplay = (props: {
   const rows = state.gamesData.map((game) => (
     <Table.Tr key={game.name}>
       <Table.Td>{game.name}</Table.Td>
-      <Table.Td>{game.genre}</Table.Td>
+      <Table.Td>
+        <Genres genres={game.genre} />
+      </Table.Td>
       <Table.Td>
         <Button
           component="a"
@@ -88,7 +88,11 @@ export const TableDisplay = (props: {
       <Table.Td>{game.createdAt.format("{numeric-uk} {time-24}")}</Table.Td>
       <Table.Td>{game.updatedAt.format("{numeric-uk} {time-24}")}</Table.Td>
       <Table.Td>
-        <GameControls gameValues={game} refreshData={props.refreshData} />
+        <GameControls
+          gameValues={game}
+          genreTags={props.genreTags}
+          refreshData={props.refreshData}
+        />
       </Table.Td>
     </Table.Tr>
   ));
@@ -119,16 +123,14 @@ export const TableDisplay = (props: {
             if (column.name === "addGame") {
               return (
                 <Table.Th key={column.name}>
-                  <AddGame refreshData={props.refreshData} />
+                  <AddGame genreTags={props.genreTags} refreshData={props.refreshData} />
                 </Table.Th>
               );
             }
             return (
               <Table.Th
                 key={column.name}
-                onClick={
-                  column.isSortable ? () => handleOnClick(column) : undefined
-                }
+                onClick={column.isSortable ? () => handleOnClick(column) : undefined}
               >
                 <Flex justify="center" align="center" gap="xs">
                   <p>{column.name}</p>

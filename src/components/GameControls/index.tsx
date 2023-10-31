@@ -9,6 +9,7 @@ import classes from "./GameControls.module.css";
 
 export const GameControls = (props: {
   gameValues: GameTableEntry;
+  genreTags?: string[];
   refreshData: () => void;
 }) => {
   const [gameFormOpened, { open, close }] = useDisclosure(false);
@@ -53,6 +54,7 @@ export const GameControls = (props: {
         <GameForm
           mutation={EDIT_GAME}
           gameValues={editGameValues}
+          genreTags={props.genreTags}
           refreshData={props.refreshData}
           closeModal={close}
         />
