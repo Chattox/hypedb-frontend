@@ -54,6 +54,12 @@
   }
 }
 
+.react-datepicker__month-select,
+.react-datepicker__year-select {
+  background-color: green;
+  border-radius: var(--mantine-radius-hype);
+}
+
 // Quarter
 
 .react-datepicker-year-header {
