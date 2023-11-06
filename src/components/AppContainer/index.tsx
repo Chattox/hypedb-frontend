@@ -1,4 +1,4 @@
-import { Alert, Container, Loader } from "@mantine/core";
+import { Alert, Container, Image, Loader } from "@mantine/core";
 import classes from "./AppContainer.module.css";
 import { GameTable } from "../GameTable";
 import { useQuery } from "@apollo/client";
@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { formatData } from "../../utils/formatData";
 import { IconSkull } from "@tabler/icons-react";
 import { getGenreTags } from "../../utils/getGenreTags";
+import titleImg from "./hypedb-title.png";
 
 export const AppContainer = () => {
   const { data, loading, error, refetch } = useQuery(GET_GAMES);
@@ -43,6 +44,7 @@ export const AppContainer = () => {
 
   return (
     <Container size="75vw" pt="xl" className={classes.AppContainer}>
+      <Image src={titleImg} fit="contain" w="auto" className={classes.titleImg} />
       {error ? (
         <ServerError />
       ) : loading && formattedData.length === 0 ? (

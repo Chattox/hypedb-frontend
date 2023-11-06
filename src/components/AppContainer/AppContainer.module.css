@@ -1,5 +1,7 @@
 .AppContainer {
   text-align: center;
+  padding-top: 1rem !important;
+  padding-bottom: 1rem;
 }
 
 .ServerError {
@@ -9,4 +11,9 @@
   margin-right: auto;
   text-align: left;
   box-shadow: 0 0 1.25rem rgba(0, 0, 0, 0.1);
+}
+
+.titleImg {
+  margin-left: auto;
+  margin-right: auto;
 }
