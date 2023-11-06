@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.4.0](https://github.com/Chattox/hypedb-frontend/compare/v0.3.0...v0.4.0) (2023-11-06)
+
+
+### Features
+
+* **game-form:** specific date picker month and year dropdowns ([4e7b931](https://github.com/Chattox/hypedb-frontend/commit/4e7b9316c6e8792315a4558bef0a7cdd8ac5148d))
+* **title:** hypedb title image ([4073e50](https://github.com/Chattox/hypedb-frontend/commit/4073e50b74d943f436713f142f152017753966e9))
+
+
+### Bug Fixes
+
+* **game-form:** genre tags not autocompleting on add game ([#27](https://github.com/Chattox/hypedb-frontend/issues/27)) ([3de9623](https://github.com/Chattox/hypedb-frontend/commit/3de96234809e347d0920b63f15562d2bc4138a9e))
+
 ## [0.3.0](https://github.com/Chattox/hypedb-frontend/compare/v0.2.0...v0.3.0) (2023-10-31)
 
 
