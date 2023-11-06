@@ -54,6 +54,41 @@
   }
 }
 
+.react-datepicker__month-dropdown-container--scroll {
+  margin-left: 0;
+  margin-right: 16px;
+}
+
+.react-datepicker__year-dropdown-container--scroll {
+  margin-left: 16px;
+}
+
+.react-datepicker__month-read-view, .react-datepicker__year-read-view {
+  visibility: visible !important;
+  color: var(--mantine-color-hypePurplePrimary-0);
+  font-weight: 500;
+  font-size: 0.9rem;
+  &:hover {
+    .react-datepicker__month-read-view--down-arrow, .react-datepicker__year-read-view--down-arrow {
+      border-color: var(--mantine-color-hypePurplePrimary-9) !important;
+    }
+  }
+}
+
+.react-datepicker__month-read-view--down-arrow, .react-datepicker__year-read-view--down-arrow {
+  border-color: var(--mantine-color-hypePurplePrimary-0) !important;
+  margin-top: 0.25rem;
+}
+
+.react-datepicker__month-dropdown, .react-datepicker__year-dropdown {
+  background-color: var(--mantine-color-white);
+  color: var(--mantine-color-hypePurplePrimary-9);
+}
+
+.react-datepicker__navigation--years {
+  height: 25px;
+}
+
 // Quarter
 
 .react-datepicker-year-header {
