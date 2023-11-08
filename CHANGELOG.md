@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.1](https://github.com/Chattox/hypedb-frontend/compare/v0.4.0...v0.4.1) (2023-11-08)
+
+
+### Bug Fixes
+
+* **table:** not respecting current sorting on add or edit game ([4206f03](https://github.com/Chattox/hypedb-frontend/commit/4206f03e8af0faddc32afbf9ec4ee71eec727a29))
+
 ## [0.4.0](https://github.com/Chattox/hypedb-frontend/compare/v0.3.0...v0.4.0) (2023-11-06)
 
 
