@@ -21,7 +21,15 @@ export const TableDisplay = (props: {
 
   useEffect(() => {
     if (!props.isLoading) {
-      setState({ ...state, gamesData: props.gamesData });
+      if (state.sortColumn !== " ") {
+        const column = columns.find((c) => c.name === state.sortColumn);
+        const sortOrder = state.sortOrder === "asc" ? "desc" : "asc";
+        setState({
+          ...tableSort({ ...state, sortOrder: sortOrder, gamesData: props.gamesData }, column!),
+        });
+      } else {
+        setState({ ...state, gamesData: props.gamesData });
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.gamesData, props.isLoading]);
