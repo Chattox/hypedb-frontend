@@ -1,6 +1,7 @@
 {
   "release-type": "node",
   "initial-version": "0.5.0",
+  "bootstrap-sha": "e87d42d60d8281c75d5d26f2ea6207f7dea6f445",
   "bump-minor-pre-major": true,
   "bump-patch-for-minor-pre-major": true,
   "packages": {
