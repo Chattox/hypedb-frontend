@@ -41,8 +41,8 @@ Install dependencies
 Create `.env` file with the following env vars (also found in `.env.example`)
 
 ```
-REACT_APP_LOCAL_API_URL="" // url to hypedb backend running locally
-REACT_APP_PROD_API_URL="" // url for prod hypedb backend
+PUBLIC_LOCAL_API_URL="" // url to hypedb backend running locally
+PUBLIC_PROD_API_URL="" // url for prod hypedb backend
 ```
 
 Start the server
