@@ -1,3 +1,4 @@
 body {
   background: var(--mantine-color-background-gradient);
+  height: 100vh;
 }

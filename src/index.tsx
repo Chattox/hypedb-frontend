@@ -23,7 +23,11 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <MantineProvider theme={customTheme} cssVariablesResolver={resolver}>
+    <MantineProvider
+      theme={customTheme}
+      cssVariablesResolver={resolver}
+      forceColorScheme="light"
+    >
       <ApolloProvider client={client}>
         <Notifications autoClose={3000} />
         <App />
