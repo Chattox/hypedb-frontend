@@ -3,7 +3,11 @@ import { useEffect, useState } from "react";
 import { tableSort } from "../../../utils/tableSort";
 import classes from "./Tabledisplay.module.css";
 import { GameControls } from "../../GameControls";
-import { IconChevronDown, IconChevronUp, IconExternalLink } from "@tabler/icons-react";
+import {
+  IconChevronDown,
+  IconChevronUp,
+  IconExternalLink,
+} from "@tabler/icons-react";
 import { AddGame } from "../../GameControls/AddGame";
 import { Genres } from "./Genres";
 
@@ -25,7 +29,10 @@ export const TableDisplay = (props: {
         const column = columns.find((c) => c.name === state.sortColumn);
         const sortOrder = state.sortOrder === "asc" ? "desc" : "asc";
         setState({
-          ...tableSort({ ...state, sortOrder: sortOrder, gamesData: props.gamesData }, column!),
+          ...tableSort(
+            { ...state, sortOrder: sortOrder, gamesData: props.gamesData },
+            column!
+          ),
         });
       } else {
         setState({ ...state, gamesData: props.gamesData });
@@ -131,16 +138,30 @@ export const TableDisplay = (props: {
             if (column.name === "addGame") {
               return (
                 <Table.Th key={column.name}>
-                  <AddGame genreTags={props.genreTags} refreshData={props.refreshData} />
+                  <AddGame
+                    genreTags={props.genreTags}
+                    refreshData={props.refreshData}
+                  />
                 </Table.Th>
               );
             }
             return (
               <Table.Th
                 key={column.name}
-                onClick={column.isSortable ? () => handleOnClick(column) : undefined}
+                onClick={
+                  column.isSortable ? () => handleOnClick(column) : undefined
+                }
               >
-                <Flex justify="center" align="center" gap="xs">
+                <Flex
+                  justify="center"
+                  align="center"
+                  gap="xs"
+                  className={
+                    column.isSortable
+                      ? classes.gameTableSortableHeader
+                      : undefined
+                  }
+                >
                   <p>{column.name}</p>
                   {column.name === state.sortColumn ? (
                     state.sortOrder === "asc" ? (

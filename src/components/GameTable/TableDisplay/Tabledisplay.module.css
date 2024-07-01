@@ -22,6 +22,14 @@
   border: none;
 }
 
+.gameTableSortableHeader {
+  border-radius: 0.25rem;
+  &:hover {
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.12);
+  }
+}
+
 .gameTableRow {
   transition: background-color 0.15s ease-out;
 }

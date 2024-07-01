@@ -7,7 +7,7 @@ import classes from "./ReleaseDatePicker.module.css";
 import "./ReleaseDatePicker.scss";
 
 type ReleaseDatePickerProps = {
-  value: ReleaseDateInput;
+  value?: ReleaseDateInput;
   onChange: any;
   checked?: any;
   error?: any;
@@ -29,11 +29,15 @@ export const ReleaseDatePicker = (props: ReleaseDatePickerProps) => {
     releaseDate.dateType === "custom" ? releaseDate.dateString : ""
   );
 
-  const handleOnChange = async (changeType: "dateType" | "dateString" | "custom", value: any) => {
+  const handleOnChange = async (
+    changeType: "dateType" | "dateString" | "custom",
+    value: any
+  ) => {
     if (changeType === "dateType") {
       setReleaseDate({
         dateType: value.toLowerCase(),
-        dateString: value === "Custom" ? customReleaseDate : spacetime().format("iso"),
+        dateString:
+          value === "Custom" ? customReleaseDate : spacetime().format("iso"),
       });
     } else if (changeType === "dateString") {
       const relDate = spacetime(value);
@@ -51,7 +55,9 @@ export const ReleaseDatePicker = (props: ReleaseDatePickerProps) => {
   useEffect(() => {
     setReleaseDate({
       ...releaseDate,
-      dateString: customReleaseDate ? customReleaseDate : releaseDate.dateString,
+      dateString: customReleaseDate
+        ? customReleaseDate
+        : releaseDate.dateString,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [customReleaseDate]);
@@ -95,7 +101,9 @@ export const ReleaseDatePicker = (props: ReleaseDatePickerProps) => {
             label="Custom release date"
             placeholder="Coming Soon™"
             value={customReleaseDate}
-            onChange={(event) => handleOnChange("custom", event.currentTarget.value)}
+            onChange={(event) =>
+              handleOnChange("custom", event.currentTarget.value)
+            }
           />
         );
     }
@@ -107,7 +115,9 @@ export const ReleaseDatePicker = (props: ReleaseDatePickerProps) => {
         label="Date type"
         data={["Specific", "Quarter", "Year", "Custom"]}
         value={capitalise(releaseDate.dateType)}
-        onChange={(event) => handleOnChange("dateType", event.currentTarget.value)}
+        onChange={(event) =>
+          handleOnChange("dateType", event.currentTarget.value)
+        }
         className={classes.dateTypeSelect}
       />
       {getPicker()}
