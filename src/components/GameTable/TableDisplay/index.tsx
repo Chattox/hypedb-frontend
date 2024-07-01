@@ -31,7 +31,7 @@ export const TableDisplay = (props: {
         setState({
           ...tableSort(
             { ...state, sortOrder: sortOrder, gamesData: props.gamesData },
-            column!
+            column!,
           ),
         });
       } else {

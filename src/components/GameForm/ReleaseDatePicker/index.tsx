@@ -1,3 +1,4 @@
+/* eslint @typescript-eslint/no-explicit-any: 0 */
 import { Fieldset, NativeSelect, TextInput } from "@mantine/core";
 import { useEffect, useState } from "react";
 import ReactDatePicker from "react-datepicker";
@@ -23,15 +24,15 @@ export const ReleaseDatePicker = (props: ReleaseDatePickerProps) => {
       : {
           dateType: "specific",
           dateString: spacetime().format("iso"),
-        }
+        },
   );
   const [customReleaseDate, setCustomReleaseDate] = useState(
-    releaseDate.dateType === "custom" ? releaseDate.dateString : ""
+    releaseDate.dateType === "custom" ? releaseDate.dateString : "",
   );
 
   const handleOnChange = async (
     changeType: "dateType" | "dateString" | "custom",
-    value: any
+    value: any,
   ) => {
     if (changeType === "dateType") {
       setReleaseDate({

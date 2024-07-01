@@ -36,15 +36,20 @@ export const AppContainer = () => {
         icon={<IconSkull />}
         className={classes.ServerError}
       >
-        Something has gone wrong and data isn't being received from the server. Please try again
-        later.
+        Something has gone wrong and data isn't being received from the server.
+        Please try again later.
       </Alert>
     );
   };
 
   return (
     <Container size="75vw" pt="xl" className={classes.AppContainer}>
-      <Image src={titleImg} fit="contain" w="auto" className={classes.titleImg} />
+      <Image
+        src={titleImg}
+        fit="contain"
+        w="auto"
+        className={classes.titleImg}
+      />
       {error ? (
         <ServerError />
       ) : loading && formattedData.length === 0 ? (
