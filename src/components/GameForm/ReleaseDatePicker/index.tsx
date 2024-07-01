@@ -1,3 +1,4 @@
+/* eslint @typescript-eslint/no-explicit-any: 0 */
 import { Fieldset, NativeSelect, TextInput } from "@mantine/core";
 import { useEffect, useState } from "react";
 import ReactDatePicker from "react-datepicker";
