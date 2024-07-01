@@ -1,5 +1,26 @@
 # Changelog
 
+## [0.5.0](https://github.com/Chattox/hypedb-frontend/compare/hypedb-frontend-v0.4.0...hypedb-frontend-v0.5.0) (2024-07-01)
+
+
+### ⚠ BREAKING CHANGES
+
+* migrate app from CRA to Vite
+
+### Features
+
+* **table:** on hover effect for sortable column headers ([#47](https://github.com/Chattox/hypedb-frontend/issues/47)) ([f8882d6](https://github.com/Chattox/hypedb-frontend/commit/f8882d6e5a12bdcb70aa03df43c3b05545020a9e))
+
+
+### Miscellaneous Chores
+
+* release 0.5.0 ([dbfe483](https://github.com/Chattox/hypedb-frontend/commit/dbfe48358a12d1cf5e6570eeb66d5541cdb0713f))
+
+
+### Build System
+
+* migrate app from CRA to Vite ([a45ee40](https://github.com/Chattox/hypedb-frontend/commit/a45ee40b9e6e371f424e5f69473b4592247daff7))
+
 ## [0.4.0](https://github.com/Chattox/hypedb-frontend/compare/v0.3.0...v0.4.0) (2023-11-06)
 
 
