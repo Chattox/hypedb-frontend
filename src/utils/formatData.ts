@@ -1,4 +1,4 @@
-import spacetime from 'spacetime';
+import spacetime from "spacetime";
 
 export const formatData = (data: Game[]): GameTableEntry[] => {
   return data.map((game) => ({

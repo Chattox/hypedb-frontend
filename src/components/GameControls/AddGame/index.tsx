@@ -5,7 +5,10 @@ import { GameForm } from "../../GameForm";
 import { ADD_GAME } from "../../../utils/operations";
 import classes from "../GameControls.module.css";
 
-export const AddGame = (props: { genreTags?: string[]; refreshData: () => void }) => {
+export const AddGame = (props: {
+  genreTags?: string[];
+  refreshData: () => void;
+}) => {
   const [opened, { open, close }] = useDisclosure(false);
 
   return (
@@ -39,7 +42,12 @@ export const AddGame = (props: { genreTags?: string[]; refreshData: () => void }
         withArrow
         arrowSize={5}
       >
-        <ActionIcon variant="subtle" color="hypePurple.0" size="lg" onClick={open}>
+        <ActionIcon
+          variant="subtle"
+          color="hypePurple.0"
+          size="lg"
+          onClick={open}
+        >
           <IconPlus size={32} />
         </ActionIcon>
       </Tooltip>

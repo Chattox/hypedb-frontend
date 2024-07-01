@@ -1,49 +1,56 @@
-import { Spacetime } from 'spacetime';
+import { Spacetime } from "spacetime";
 
-export const tableSort = (tableState: TableStateProps, column: Column): TableStateProps => {
+export const tableSort = (
+  tableState: TableStateProps,
+  column: Column,
+): TableStateProps => {
   const newSortOrder =
     tableState.sortColumn === column.name
-      ? tableState.sortOrder === 'asc'
-        ? 'desc'
-        : 'asc'
-      : 'asc';
+      ? tableState.sortOrder === "asc"
+        ? "desc"
+        : "asc"
+      : "asc";
 
   switch (column.type) {
-    case 'text':
+    case "text":
       return {
         ...tableState,
         sortColumn: column.name,
         sortOrder: newSortOrder,
         gamesData:
-          newSortOrder === 'asc'
+          newSortOrder === "asc"
             ? [...tableState.gamesData].sort((a, b) =>
                 (a[column.accessor] as string).toLowerCase() <
                 (b[column.accessor] as string).toLowerCase()
                   ? -1
-                  : 1
+                  : 1,
               )
             : [...tableState.gamesData].sort((a, b) =>
                 (a[column.accessor] as string).toLowerCase() >
                 (b[column.accessor] as string).toLowerCase()
                   ? -1
-                  : 1
+                  : 1,
               ),
       };
-    case 'numeric':
+    case "numeric":
       return {
         ...tableState,
         sortColumn: column.name,
         sortOrder: newSortOrder,
         gamesData:
-          newSortOrder === 'asc'
+          newSortOrder === "asc"
             ? [...tableState.gamesData].sort((a, b) =>
-                (a[column.accessor] as number) < (b[column.accessor] as number) ? -1 : 1
+                (a[column.accessor] as number) < (b[column.accessor] as number)
+                  ? -1
+                  : 1,
               )
             : [...tableState.gamesData].sort((a, b) =>
-                (a[column.accessor] as number) > (b[column.accessor] as number) ? -1 : 1
+                (a[column.accessor] as number) > (b[column.accessor] as number)
+                  ? -1
+                  : 1,
               ),
       };
-    case 'releaseDate':
+    case "releaseDate":
       return {
         ...tableState,
         sortColumn: column.name,
@@ -53,15 +60,15 @@ export const tableSort = (tableState: TableStateProps, column: Column): TableSta
           const bDate = (b[column.accessor] as ReleaseDateTableEntry).date;
 
           if (aDate.isBefore(bDate)) {
-            return newSortOrder === 'asc' ? -1 : 1;
+            return newSortOrder === "asc" ? -1 : 1;
           } else if (aDate.isAfter(bDate)) {
-            return newSortOrder === 'asc' ? 1 : -1;
+            return newSortOrder === "asc" ? 1 : -1;
           } else {
             return 0;
           }
         }),
       };
-    case 'date':
+    case "date":
       return {
         ...tableState,
         sortColumn: column.name,
@@ -71,9 +78,9 @@ export const tableSort = (tableState: TableStateProps, column: Column): TableSta
           const bDate = b[column.accessor] as Spacetime;
 
           if (aDate.isBefore(bDate)) {
-            return newSortOrder === 'asc' ? -1 : 1;
+            return newSortOrder === "asc" ? -1 : 1;
           } else if (aDate.isAfter(bDate)) {
-            return newSortOrder === 'asc' ? 1 : -1;
+            return newSortOrder === "asc" ? 1 : -1;
           } else {
             return 0;
           }

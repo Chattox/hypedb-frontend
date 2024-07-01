@@ -19,7 +19,7 @@ const client = new ApolloClient({
 });
 
 const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
+  document.getElementById("root") as HTMLElement,
 );
 root.render(
   <React.StrictMode>
@@ -33,5 +33,5 @@ root.render(
         <App />
       </ApolloProvider>
     </MantineProvider>
-  </React.StrictMode>
+  </React.StrictMode>,
 );

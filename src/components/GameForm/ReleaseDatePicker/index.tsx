@@ -24,15 +24,15 @@ export const ReleaseDatePicker = (props: ReleaseDatePickerProps) => {
       : {
           dateType: "specific",
           dateString: spacetime().format("iso"),
-        }
+        },
   );
   const [customReleaseDate, setCustomReleaseDate] = useState(
-    releaseDate.dateType === "custom" ? releaseDate.dateString : ""
+    releaseDate.dateType === "custom" ? releaseDate.dateString : "",
   );
 
   const handleOnChange = async (
     changeType: "dateType" | "dateString" | "custom",
-    value: any
+    value: any,
   ) => {
     if (changeType === "dateType") {
       setReleaseDate({
